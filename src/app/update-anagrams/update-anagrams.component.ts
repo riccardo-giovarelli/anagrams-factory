@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'current-word',
-  templateUrl: './current-word.component.html',
-  styleUrls: ['./current-word.component.css']
+  selector: 'app-update-anagrams',
+  templateUrl: './update-anagrams.component.html',
+  styleUrls: ['./update-anagrams.component.css']
 })
-export class CurrentWordComponent {
-  
+export class UpdateAnagramsComponent {
+
   output: string[] =[];
 
   updateanAgrams = (currentWord : string) : void => {
@@ -21,4 +21,5 @@ export class CurrentWordComponent {
     if (!/^[a-z]+$/i.test(currentString)) return false;
     return true;
   }
+
 }
