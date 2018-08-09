@@ -1,8 +1,12 @@
 <div>
   <div>
-    <input #currentWord (keyup)="updateanAgrams(currentWord.value)">
+    <input class="state-color" #currentWord (keyup)="updateanAgrams(currentWord.value)">
   </div>
   <div>
-    {{output}}
+    <ul>
+      <li *ngFor="let row of output">
+        {{ row }}
+      </li>
+    </ul>
   </div>
 </div>
