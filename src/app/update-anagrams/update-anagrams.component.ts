@@ -7,26 +7,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UpdateAnagramsComponent {
 
-  output : Array<string> = [];
+  output: Array<string> = [];
 
-  updateanAgrams = (currentWord : string) : void => {
-    if (currentWord.length > 6) return;
-    if (!/^[a-z]+$/i.test(currentWord)) return ;
+  updateanAgrams = (currentWord: string): void => {
+    if (currentWord.length > 6) {
+      return;
+    }
+    if (!/^[a-z]+$/i.test(currentWord)) {
+      return;
+    }
     this.output = this.getAnagrams(currentWord);
   }
 
-  swap = (chars : Array<string>, i : number, j : number) : void => {
-      const tmp : string = chars[i];
+  swap = (chars: Array<string>, i: number, j: number): void => {
+      const tmp: string = chars[i];
       chars[i] = chars[j];
       chars[j] = tmp;
   }
 
-  getAnagrams = (input : string) : Array<string> => {
-    const counter : Array<number> = [];
-    const anagrams : Array<string> = [];
-    const chars : Array<string> = input.split('');
-    const length : number = chars.length;
-    let i : number = 0;
+  getAnagrams = (input: string): Array<string> => {
+    const counter: Array<number> = [];
+    const anagrams: Array<string> = [];
+    const chars: Array<string> = input.split('');
+    const length: number = chars.length;
+    let i = 0;
 
     for (i = 0; i < length; i++) {
         counter[i] = 0;
@@ -46,11 +50,5 @@ export class UpdateAnagramsComponent {
     }
 
     return anagrams;
-  }
-
-  checkString = (currentString: string) : boolean => {
-    if (currentString.length > 10) return false;
-    if (!/^[a-z]+$/i.test(currentString)) return false;
-    return true;
   }
 }
