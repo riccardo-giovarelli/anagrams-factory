@@ -1,12 +1,22 @@
 <div>
-  <div>
-    <input class="state-color" #currentWord (keyup)="updateanAgrams(currentWord.value)">
+  <div class="input-container">
+    <div>
+      <p><input type="text" name="original-word" [attr.maxlength]="maxChar" [attr.class]="inputState" #currentWord (keyup)="updateanAgrams(currentWord.value)"></p>
+      <p>(Max {{maxChar}} chars)</p>
+    </div>
+    <div>
+      <p class="alert">
+      {{ warningMessage }}
+      </p>
+    </div>
   </div>
   <div>
-    <ul>
-      <li *ngFor="let row of output">
-        {{ row }}
-      </li>
-    </ul>
+    <div class="list-container">
+      <ul *ngIf="output.length > 0">
+        <li *ngFor="let row of output">
+          {{ row }}
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
