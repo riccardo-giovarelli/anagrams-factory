@@ -8,23 +8,26 @@ import { Component, OnInit } from '@angular/core';
 export class UpdateAnagramsComponent {
 
   output: Array<string> = [];
-  inputState = 'input-state-ok';
+  inputStateKo = 'bg-danger';
+  inputStateOk = 'bg-light';
+  inputState = this.inputStateOk;
   warningMessage = '';
   maxChar = 6;
+
 
   updateanAgrams = (currentWord: string): void => {
     switch (true) {
       case (currentWord.length === 0):
-        this.inputState = 'input-state-ok';
+        this.inputState = this.inputStateOk;
         this.output = [];
         this.warningMessage = '';
         break;
       case (!/^[a-z]+$/i.test(currentWord)):
-        this.inputState = 'input-state-ko';
+        this.inputState = this.inputStateKo;
         this.warningMessage = 'Only literal chars!';
         break;
       default:
-        this.inputState = 'input-state-ok';
+        this.inputState = this.inputStateOk;
         this.warningMessage = '';
         this.output = this.getAnagrams(currentWord);
         break;
