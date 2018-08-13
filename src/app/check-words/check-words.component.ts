@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { CheckCallService } from './../check-call.service';
 
 @Component({
   selector: 'app-check-words',
@@ -12,16 +12,10 @@ export class CheckWordsComponent {
   @Input() anagrams: string;
   baseUrl = 'https://en.wiktionary.org/w/api.php?action=query&titles=';
 
-  constructor(
-    private http: HttpClient) { }
-
-  checkWords = (currentWorld: string): any => {
-    return this.http.get(this.baseUrl + currentWorld);
-  }
+  constructor (private checkCall: CheckCallService) {}
 
   analizeList = (): void => {
-    this.checkWords('ciao')
-    .subscribe((data: any) => this.checkResult = data);
-    console.log(this.checkResult);
+    const result = this.checkCall.callApi(this.baseUrl + 'Ciao');
+    console.log(result);
   }
 }
