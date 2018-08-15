@@ -11,7 +11,7 @@ export class LoadDicService {
   constructor(private http: Http) {
     this.http.get('../assets/dic.json')
     .subscribe(res => {
-      this.dictonary = res.json();
+      this.dictonary = res.text();
     });
   }
 

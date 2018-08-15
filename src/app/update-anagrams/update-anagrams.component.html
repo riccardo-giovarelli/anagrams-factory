@@ -24,7 +24,7 @@
       <div *ngIf="output.length > 0 && warningMessage === ''" class="bg-info text-center pt-3 mt-3">
         <app-check-words [anagrams]='output'></app-check-words>
         <ul>
-          <li class="text-center alert alert-light" *ngFor="let row of output">
+          <li id="li_{{ row.toLowerCase() }}" class="text-center alert alert-light" *ngFor="let row of output">
             {{ row }}
           </li>
         </ul>
