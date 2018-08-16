@@ -1,22 +1,35 @@
-<div>
-  <div class="input-container">
-    <div>
-      <p><input type="text" name="original-word" [attr.maxlength]="maxChar" [attr.class]="inputState" #currentWord (keyup)="updateanAgrams(currentWord.value)"></p>
-      <p>(Max {{maxChar}} chars)</p>
+<div class='container'>
+  <div class='row'>
+    <div class="col"></div>
+    <div class="col-6">
+      <div class='text-center'>
+        <div class="my-1">
+          <input type="text" name="original-word" [attr.maxlength]="maxChar" [attr.class]="inputState" #currentWord (keyup)="updateanAgrams(currentWord.value)">
+        </div>
+        <div class="my-1 text-white">
+          (Max {{maxChar}} chars and only letters)
+        </div>
+      </div>
+      <div class="my-5">
+        <p class="alert alert-danger text-center" *ngIf="warningMessage !== ''">
+        {{ warningMessage }}
+        </p>
+      </div>
     </div>
-    <div>
-      <p class="alert">
-      {{ warningMessage }}
-      </p>
-    </div>
+    <div class="col"></div>
   </div>
-  <div>
-    <div class="list-container">
-      <ul *ngIf="output.length > 0">
-        <li *ngFor="let row of output">
-          {{ row }}
-        </li>
-      </ul>
+  <div class='row'>
+    <div class="col"></div>
+    <div class="col-8">
+      <div *ngIf="output.length > 0 && warningMessage === ''" class="bg-info text-center pt-3 mt-3">
+        <app-check-words [anagrams]='output'></app-check-words>
+        <ul>
+          <li id="li_{{ row.toLowerCase() }}" class="text-center alert alert-light" *ngFor="let row of output">
+            {{ row }}
+          </li>
+        </ul>
+      </div>
     </div>
+    <div class="col"></div>
   </div>
 </div>
