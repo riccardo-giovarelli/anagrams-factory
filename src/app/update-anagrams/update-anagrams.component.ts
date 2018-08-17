@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-update-anagrams',
@@ -42,7 +42,7 @@ export class UpdateAnagramsComponent {
 
   getAnagrams = (input: string): Array<string> => {
     const counter: Array<number> = [];
-    const anagrams: Array<string> = [];
+    let anagrams: Array<string> = [];
     const chars: Array<string> = input.split('');
     const length: number = chars.length;
     let i = 0;
@@ -63,6 +63,7 @@ export class UpdateAnagramsComponent {
             i++;
         }
     }
+    anagrams = Array.from(new Set(anagrams));
 
     return anagrams;
   }
