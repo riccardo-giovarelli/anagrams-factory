@@ -5,7 +5,6 @@ import * as _ from 'underscore';
 @Component({
   selector: 'app-check-words',
   templateUrl: './check-words.component.html',
-  styleUrls: ['./check-words.component.css'],
   providers: [LoadDicService]
 })
 
@@ -14,21 +13,22 @@ export class CheckWordsComponent {
   @Input() anagrams: string;
   results: Array<string> = [];
 
-  constructor(private _loadDic: LoadDicService) { }
+  constructor(private loadDic: LoadDicService) { }
 
   analizeList = (currentStrings: Array<string>) => {
+    this.results = [];
+    const dictonary = this.loadDic.getDictionary();
+    const dictonaryArray = JSON.parse(dictonary);
 
+    document.getElementById('main').className = 'loader';
     document.getElementById('overlay').style.display = 'block';
-    document.querySelector('div[id=\'main\']').setAttribute('class', 'loader');
 
     _.defer(() => {
-      this.results = [];
-      const dictonary = this._loadDic.getDictionary();
-      const dictonaryArray = JSON.parse(dictonary);
-
       for (const currentString of currentStrings) {
         for (const currentWord of dictonaryArray) {
-          if (currentWord.word.toLowerCase() === currentString.toLowerCase()) {
+          if (currentWord.word !== undefined &&
+            currentWord.word !== null &&
+            currentWord.word.toString().toLowerCase() === currentString.toLowerCase()) {
             this.results.push(currentString.toLowerCase());
           }
         }
@@ -56,7 +56,7 @@ export class CheckWordsComponent {
       _.defer(() => {
         setTimeout(() => {
           document.getElementById('overlay').style.display = 'none';
-          document.querySelector('div[id=\'main\']').setAttribute('class', '');
+          document.getElementById('main').className = '';
         }, 1000);
       });
     });
