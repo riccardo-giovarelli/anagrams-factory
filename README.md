@@ -8,9 +8,13 @@ Anagrams generator with the possibility to search for real word in those generat
 
 The main goal of this project is learn and deepen some interesting technologies like Angular 2 and TypeScript.
 
+## Main requirements
+
+Node.js and Doker
+
 ## Installation 
 
-With Node.js clone or download this repository and run `npm install`.
+Clone or download the repository and run `npm install`.
 
 ## Development server
 
