@@ -2,7 +2,7 @@
 
 ## What is it?
 
-Anagrams generator with the possibility to search for real word in those generated in a simple dictionary with Italian and English words.
+Anagrams generator and validator (with simple Italian and English dictionary).
 
 ## Main goals
 
