@@ -3,13 +3,13 @@
   "version": "0.0.1",
   "scripts": {
     "ng": "ng",
-    "docker-build": "docker build -t anagrams-factory-server .",
+    "create": "docker build -t anagrams-factory-server .",
     "start": "docker run -p 8099:8099 anagrams-factory-server && ng serve",
-    "docker-clean": "docker stop anagrams-factory-server && docker rm anagrams-factory-server",
-    "ng-build": "ng build",
-    "ng-test": "ng test",
-    "ng-lint": "ng lint",
-    "ng-e2e": "ng e2e"
+    "clean": "docker stop anagrams-factory-server && docker rm anagrams-factory-server",
+    "build": "ng build",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
