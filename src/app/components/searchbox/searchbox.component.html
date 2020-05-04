@@ -1,0 +1,9 @@
+<div class="searchbox__container">
+  <div class="searchbox__input-container">
+    <input id="word-input" [(ngModel)]="word" type="text" class="form-control" />
+  </div>
+  <div class="searchbox__button-container">
+    <button type="button" class="btn btn-primary btn-lg searchbox__button">Anagrams</button>
+    <button type="button" class="btn btn-secondary btn-lg searchbox__button" (click)="clear()">Reset</button>
+  </div>
+</div>
