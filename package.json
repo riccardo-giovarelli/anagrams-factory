@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "create": "docker build -t anagrams-factory-server .",
-    "start": "docker run -p 8099:8099 anagrams-factory-server && ng serve",
+    "start-client": "ng serve",
+    "start-server": "docker run -p 8099:8099 anagrams-factory-server",
     "clean": "docker stop anagrams-factory-server && docker rm anagrams-factory-server",
     "build": "ng build",
     "test": "ng test",

@@ -16,9 +16,11 @@ export class SearchboxComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
+  // Clear input element
   clear() {
     this.word = '';
   }
+
+
 
 }
