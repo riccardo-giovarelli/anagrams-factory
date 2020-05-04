@@ -1,14 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-searchbox',
   templateUrl: './searchbox.component.html',
-  styleUrls: ['./searchbox.component.scss']
+  styleUrls: ['./searchbox.component.scss'],
+  providers: [ApiService]
 })
 export class SearchboxComponent implements OnInit {
 
-  constructor() {
+  constructor(private apiservice: ApiService) {
     this.word = '';
+
   }
 
   word: string;
@@ -21,6 +24,9 @@ export class SearchboxComponent implements OnInit {
     this.word = '';
   }
 
-
+  // Get anagrams
+  anagrams() {
+    this.apiservice.getAnagrams(this.word);
+  }
 
 }
