@@ -1,22 +1,15 @@
-import cherrypy
-import pandas as pd
-import anagram
-anagram = anagram.Anagram()
+
+from flask import Flask, request
+from flask_cors import CORS
+from anagram import calculateAnagrams
+
+app = Flask(__name__)
+app.config['CORS_HEADERS'] = 'Content-Type'
+@app.route('/anagrams', methods=['GET'])
+def returnAnagrams():
+    return calculateAnagrams(request.args['text'])
 
 
-class Server(object):
-
-    @cherrypy.expose
-    @cherrypy.tools.json_out()
-    @cherrypy.tools.json_in()
-    def process(self):
-        data = cherrypy.request.json
-        df = pd.DataFrame(data)
-        output = pd.run(df)
-        return output.to_json()
-
-
-if __name__ == '__main__':
-    config = {'server.socket_host': '0.0.0.0'}
-    cherrypy.config.update(config)
-    cherrypy.quickstart(Server())
+if __name__ == "__main__":
+    CORS(app)
+    app.run(host='127.0.0.1', port=4300)

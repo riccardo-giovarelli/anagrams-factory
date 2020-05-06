@@ -11,10 +11,11 @@ export class SearchboxComponent implements OnInit {
 
   constructor(private apiservice: ApiService) {
     this.word = '';
-
+    this.anagrams = {};
   }
 
   word: string;
+  anagrams: object;
 
   ngOnInit(): void {
   }
@@ -25,8 +26,10 @@ export class SearchboxComponent implements OnInit {
   }
 
   // Get anagrams
-  anagrams() {
-    this.apiservice.getAnagrams(this.word);
+  getAnagrams() {
+    this.apiservice.getAnagrams(this.word).subscribe({
+      next: data => this.anagrams = data,
+      error: error => console.error('Error while retrieving anagrams. Error:', error.message)
+    });
   }
-
 }

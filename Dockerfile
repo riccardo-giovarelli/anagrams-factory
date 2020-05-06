@@ -8,9 +8,8 @@ WORKDIR /usr/src/app
 COPY ./src/server/ .
 
 # Installing packages
-RUN pip install CherryPy
-RUN pip install pandas
-RUN pip install requests
+RUN pip install Flask
+RUN pip install flask_cors
 
 # Exposing server
 EXPOSE 8080
