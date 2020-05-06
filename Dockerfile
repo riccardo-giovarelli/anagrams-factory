@@ -12,5 +12,4 @@ RUN pip install Flask
 RUN pip install flask_cors
 
 # Exposing server
-EXPOSE 8080
 ENTRYPOINT ["python", "server.py"]
