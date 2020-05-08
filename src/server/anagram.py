@@ -35,7 +35,7 @@ Return all possible anagrams for the word provided
 
 
 def getAnagrams(text):
-    return json.dumps(getAnagrams(text))
+    return json.dumps(generateAnagrams(text))
 
 
 """ swap
