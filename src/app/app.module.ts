@@ -9,12 +9,15 @@ import { AppComponent } from './app.component';
 import { TitleComponent } from './components/title/title.component';
 import { SearchboxComponent } from './components/searchbox/searchbox.component';
 import { ApiService } from './services/api.service';
+import { SpinnerComponent } from './components/spinner/spinner.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     TitleComponent,
-    SearchboxComponent
+    SearchboxComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,9 @@
+<div
+  [ngClass]="(spinnerVisibility === true) ? 'spinner__overlay spinner__overlay--visible' : 'spinner__overlay spinner__overlay--hidden'">
+</div>
+<div
+  [ngClass]="(spinnerVisibility === true) ? 'spinner__container spinner__container--visible' : 'spinner__container spinner__container--hidden'">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
