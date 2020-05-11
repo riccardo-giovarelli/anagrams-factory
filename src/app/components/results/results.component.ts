@@ -1,14 +1,22 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-results',
   templateUrl: './results.component.html',
   styleUrls: ['./results.component.scss']
 })
-export class ResultsComponent {
+
+export class ResultsComponent implements OnInit {
+
+  p: number;
 
   @Input() errorMessage = '';
-  @Input() anagrams = {};
+  @Input() anagrams = [];
 
   constructor() { }
+
+  // Angular ngOnInit
+  ngOnInit() {
+    this.p = 1;
+  }
 }

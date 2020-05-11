@@ -5,14 +5,17 @@
     </div>
   </div>
 </ng-template>
-<ng-template [ngIf]="anagrams !== {}">
+<ng-template [ngIf]="anagrams !== []">
   <div class="results__result-container">
     <div class="results__result-list">
       <ul class="list-group list-group-flush">
-        <li class="list-group-item" *ngFor="let anagram of anagrams">
+        <li class="list-group-item" *ngFor="let anagram of anagrams | paginate: { itemsPerPage: 10, currentPage: p }">
           {{ anagram }}
         </li>
       </ul>
     </div>
+  </div>
+  <div class="results__pagination-controll-container">
+    <pagination-controls (pageChange)="p = $event" autoHide="true" responsive="true" maxSize="6"></pagination-controls>
   </div>
 </ng-template>

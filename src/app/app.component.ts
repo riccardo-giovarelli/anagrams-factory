@@ -22,6 +22,7 @@ export class AppComponent implements OnInit {
   setResults(result: any) {
     switch (result.status) {
       case 'results':
+        this.errorMessage = '';
         this.anagrams = result.results;
         this.spinnerVisibility = false;
         break;
@@ -31,6 +32,8 @@ export class AppComponent implements OnInit {
         this.spinnerVisibility = false;
         break;
       case 'spinner':
+        this.errorMessage = '';
+        this.anagrams = [];
         this.spinnerVisibility = result.results;
         break;
     }
