@@ -1,0 +1,18 @@
+<ng-template [ngIf]="errorMessage !== ''">
+  <div class="results__error-container">
+    <div class="results__error-text">
+      {{errorMessage}}
+    </div>
+  </div>
+</ng-template>
+<ng-template [ngIf]="anagrams !== {}">
+  <div class="results__result-container">
+    <div class="results__result-list">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item" *ngFor="let anagram of anagrams">
+          {{ anagram }}
+        </li>
+      </ul>
+    </div>
+  </div>
+</ng-template>

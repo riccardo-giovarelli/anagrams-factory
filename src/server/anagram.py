@@ -25,29 +25,29 @@ Copyright 2020 Riccardo Giovarelli <riccardo.giovarelli@gmail.com>
 import json
 
 
-""" getAnagrams
-
-Return all possible anagrams for the word provided
-
-@param text:  word for generate anagrams
-@return:      all possible anagrams
-"""
-
-
 def getAnagrams(text):
+    """Return all possible anagrams for the word provided
+
+    Args:
+      text (string): Thw word for generate anagrams
+
+    Returns:
+      list: All possible anagrams
+    """
+
     return json.dumps(generateAnagrams(text))
 
 
-""" swap
-
-Swap two chars in a list
-
-@param text:  word for generate anagrams
-@return:      all possible anagrams
-"""
-
-
 def swap(chars, i, j):
+    """Swap two chars in a list
+
+    Args:
+      text (string): Thw word for generate anagrams
+
+    Returns:
+      string: String with characters swapped
+    """
+
     chars = list(chars)
     tmp = chars[i]
     chars[i] = chars[j]
@@ -55,16 +55,16 @@ def swap(chars, i, j):
     return ''.join(chars)
 
 
-""" generateAnagrams
-
-Generate all possible anagrams for the word provided
-
-@param string:  word for generate anagrams
-@return:      all possible anagrams
-"""
-
-
 def generateAnagrams(string):
+    """Generate all possible anagrams for the word provided
+
+    Args:
+      string (string): Thw word for generate anagrams
+
+    Returns:
+      list: All possible anagrams
+    """
+
     string = list(string)
     stringLength = len(string)
     chars = string

@@ -1,0 +1,25 @@
+.results__result-container {
+  width: 100%;
+  margin-top: 40px;
+
+  .results__result-list {
+    width: 80%;
+    margin: auto;
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+
+.results__error-container {
+  width: 100%;
+  margin-top: 40px;
+
+  .results__error-text {
+    width: 80%;
+    margin: auto;
+  }
+}

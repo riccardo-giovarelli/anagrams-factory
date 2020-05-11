@@ -1,0 +1,12 @@
+<div
+  [ngClass]="(anagrams.length === 0) ? 'search__container search__container--full' : 'search__container search__container--min'">
+  <div
+    [ngClass]="(anagrams.length === 0) ? 'search__input-container search__input-container--full' : 'search__input-container search__input-container--min'">
+    <input id="word-input" [(ngModel)]="word" type="text" class="form-control" />
+  </div>
+  <div
+    [ngClass]="(anagrams.length === 0) ? 'search__button-container search__button-container--full' : 'search__button-container search__button-container--min'">
+    <button type="button" class="btn btn-primary btn-lg search__button" (click)="getAnagrams()">Anagrams</button>
+    <button type="button" class="btn btn-secondary btn-lg search__button" (click)="clear()">Reset</button>
+  </div>
+</div>

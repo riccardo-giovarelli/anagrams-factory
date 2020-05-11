@@ -1,3 +1,23 @@
-.app_title-container {
-margin-top: 89px;
+.app__container {
+  width: 100%;
+  margin-top: 20px;
+
+  .app__input-container {
+    width: 40vw;
+    min-width: 350px;
+    margin: auto;
+  }
+
+  .app__button-container {
+    width: 40vw;
+    min-width: 350px;
+    margin: 10px auto auto auto;
+    padding: 5px;
+    text-align: center;
+
+    .app__button {
+      width: 130px;
+      margin: 0px 10px;
+    }
+  }
 }
