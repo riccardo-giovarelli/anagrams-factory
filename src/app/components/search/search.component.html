@@ -1,5 +1,6 @@
 <div
   [ngClass]="(anagrams.length === 0) ? 'search__container search__container--full' : 'search__container search__container--min'">
+  <app-title [compact]="(anagrams.length > 0)"></app-title>
   <div
     [ngClass]="(anagrams.length === 0) ? 'search__input-container search__input-container--full' : 'search__input-container search__input-container--min'">
     <input id="word-input" [(ngModel)]="word" type="text" class="form-control" />

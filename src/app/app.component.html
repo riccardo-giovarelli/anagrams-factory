@@ -1,6 +1,5 @@
 <app-spinner [visible]='spinnerVisibility'></app-spinner>
 <div class="app__container">
-  <app-title [numOfAnagrams]='anagrams.length'></app-title>
   <app-search [anagrams]='anagrams' (anagramsChange)='setResults($event)'></app-search>
   <app-results [errorMessage]='errorMessage' [anagrams]='anagrams'></app-results>
 </div>

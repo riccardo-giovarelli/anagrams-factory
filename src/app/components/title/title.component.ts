@@ -7,5 +7,5 @@ import { Component, Input } from '@angular/core';
 })
 export class TitleComponent {
   title = 'Anagrams Factory';
-  @Input() numOfAnagrams = 0;
+  @Input() compact = false;
 }

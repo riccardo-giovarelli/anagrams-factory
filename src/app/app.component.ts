@@ -33,7 +33,6 @@ export class AppComponent implements OnInit {
         break;
       case 'spinner':
         this.errorMessage = '';
-        this.anagrams = [];
         this.spinnerVisibility = result.results;
         break;
     }

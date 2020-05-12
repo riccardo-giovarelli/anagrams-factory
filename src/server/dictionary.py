@@ -22,7 +22,14 @@ along with Anagrams Factory.  If not, see <http://www.gnu.org/licenses/>.
 Copyright 2020 Riccardo Giovarelli <riccardo.giovarelli@gmail.com>
 """
 
+import json
 
-class Dictionary:
-    def run(self, df):
-        return df.agg(['mean', 'min', 'max'])
+
+def getDictionary(lang):
+    with open('./asset/dictionary/' + lang + '.json') as json_file:
+        return json.load(json_file)
+
+
+def getTrueWorld(worlds):
+    dictionary = getDictionary('en')
+    return dictionary

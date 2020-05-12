@@ -25,12 +25,20 @@ Copyright 2020 Riccardo Giovarelli <riccardo.giovarelli@gmail.com>
 from flask import Flask, request
 from flask_cors import CORS
 from anagram import getAnagrams
+from dictionary import getTrueWorld
 
 app = Flask(__name__)
 app.config['CORS_HEADERS'] = 'Content-Type'
+
+
 @app.route('/anagrams', methods=['GET'])
 def returnAnagrams():
     return getAnagrams(request.args['text'])
+
+
+@app.route('/dictionary', methods=['POST'])
+def returnTrueWorld():
+    return getTrueWorld(request.form)
 
 
 if __name__ == "__main__":

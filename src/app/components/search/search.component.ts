@@ -25,6 +25,10 @@ export class SearchComponent implements OnInit {
   // Clear input element
   clear() {
     this.word = '';
+    this.anagramsChange.emit({
+      status: 'results',
+      results: []
+    });
   }
 
   // Get anagrams
