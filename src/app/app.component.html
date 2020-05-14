@@ -1,5 +1,6 @@
 <app-spinner [visible]='spinnerVisibility'></app-spinner>
 <div class="app__container">
-  <app-search [anagrams]='anagrams' (anagramsChange)='setResults($event)'></app-search>
-  <app-results [errorMessage]='errorMessage' [anagrams]='anagrams'></app-results>
+  <app-search [anagrams]='anagrams' (anagramsChange)='setAnagramsResults($event)'></app-search>
+  <app-results [errorMessage]='errorMessage' [anagrams]='anagrams' (dictionaryResults)='setDictionaryResults($event)'>
+  </app-results>
 </div>

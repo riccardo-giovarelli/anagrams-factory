@@ -2,12 +2,26 @@
   width: 100%;
   margin-top: 40px;
 
-  .results__title {
-    width: 80%;
-    font-size: 1.2em;
-    font-weight: bold;
+  .results__bar {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
     margin: 0px 10% 20px 10%;
     border-bottom: 2px solid rgba(0, 0, 0, 0.125);
+
+    .results__title {
+      text-align:left;
+      font-size: 1.2em;
+      font-weight: bold;
+      flex-grow: 1;
+      padding: 4px;
+    }
+
+    .results__button-dictionary {
+      text-align:right;
+      flex-grow: 1;
+      padding: 4px;
+    }
   }
 
   .results__result-list {
@@ -31,6 +45,8 @@
 .results__error-container {
   width: 100%;
   margin-top: 40px;
+  font-size: 1.6em;
+  text-align: center;
 
   .results__error-text {
     width: 80%;

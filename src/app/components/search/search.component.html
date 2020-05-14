@@ -7,7 +7,7 @@
   </div>
   <div
     [ngClass]="(anagrams.length === 0) ? 'search__button-container search__button-container--full' : 'search__button-container search__button-container--min'">
-    <button type="button" class="btn btn-primary btn-lg search__button" (click)="getAnagrams()">Anagrams</button>
-    <button type="button" class="btn btn-secondary btn-lg search__button" (click)="clear()">Reset</button>
+    <button type="button" class="btn btn-primary search__button" (click)="getAnagrams()">Anagrams</button>
+    <button type="button" class="btn btn-secondary search__button" (click)="clear()">Reset</button>
   </div>
 </div>

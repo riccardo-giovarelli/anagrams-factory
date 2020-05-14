@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
     this.spinnerVisibility = false;
   }
 
-  setResults(result: any) {
+  setAnagramsResults(result: any) {
     switch (result.status) {
       case 'results':
         this.errorMessage = '';
@@ -39,4 +39,7 @@ export class AppComponent implements OnInit {
 
   }
 
+  setDictionaryResults(result: any) {
+
+  }
 }

@@ -45,9 +45,10 @@ export class SearchComponent implements OnInit {
         });
       },
       error: error => {
+        console.error('Error while retrieving anagrams - ' + error.message);
         this.anagramsChange.emit({
           status: 'error',
-          results: 'Error while retrieving anagrams. Error: ' + error.message
+          results: 'Error: unable to retrieving anagrams.'
         });
       }
     });

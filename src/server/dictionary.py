@@ -23,13 +23,37 @@ Copyright 2020 Riccardo Giovarelli <riccardo.giovarelli@gmail.com>
 """
 
 import json
+from pprint import pprint
 
 
 def getDictionary(lang):
+    """Return dictionary by lang
+
+    Args:
+      lang (string): Language for the dictionary
+
+    Returns:
+      string: Json with the dictonary
+    """
+
     with open('./asset/dictionary/' + lang + '.json') as json_file:
         return json.load(json_file)
 
 
 def getTrueWorld(worlds):
+    """Return real world in the dictonary from the anagrams
+
+    Args:
+      worlds (list): Words list to test
+
+    Returns:
+      list: List of real word
+    """
     dictionary = getDictionary('en')
-    return dictionary
+    results = []
+    for world in worlds:
+        if (world.lower() in dictionary):
+            results.append(
+                {'world': world, 'definition': dictionary[world.lower()]}
+            )
+    return results

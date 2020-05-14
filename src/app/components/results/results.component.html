@@ -7,7 +7,12 @@
 </ng-template>
 <ng-template [ngIf]="anagrams.length > 0">
   <div class="results__result-container">
-    <div class="results__title">Results ({{anagrams.length}} items)</div>
+    <div class="results__bar">
+      <div class="results__title">Results ({{anagrams.length}} items)</div>
+      <div class="results__button-dictionary">
+        <button type="button" class="btn btn-dark" (click)="filterResults()">Find Words</button>
+      </div>
+    </div>
     <div class="results__result-list">
       <ul class="list-group list-group-flush">
         <li class="list-group-item" *ngFor="let anagram of anagrams | paginate: { itemsPerPage: 10, currentPage: p }">

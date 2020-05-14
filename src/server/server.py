@@ -22,25 +22,34 @@ along with Anagrams Factory.  If not, see <http://www.gnu.org/licenses/>.
 Copyright 2020 Riccardo Giovarelli <riccardo.giovarelli@gmail.com>
 """
 
-from flask import Flask, request
+from flask import Flask, request, abort
 from flask_cors import CORS
 from anagram import getAnagrams
 from dictionary import getTrueWorld
+import json
 
 app = Flask(__name__)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 
+# ROUTE: anagrams
 @app.route('/anagrams', methods=['GET'])
 def returnAnagrams():
     return getAnagrams(request.args['text'])
 
 
+# ROUTE: dictionary
 @app.route('/dictionary', methods=['POST'])
 def returnTrueWorld():
-    return getTrueWorld(request.form)
+    if request.json and 'list' in request.json:
+        results = getTrueWorld(request.json['list'])
+        if (len(results) > 0):
+            return json.dumps(results), 200
+        else:
+            return '', 204
 
 
+# Run Server
 if __name__ == "__main__":
     CORS(app)
     app.run(host='127.0.0.1', port=4300)
