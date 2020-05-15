@@ -11,6 +11,8 @@ import { ApiService } from 'src/app/services/api.service';
 export class SearchComponent implements OnInit {
 
   word: string;
+  isInvalid: boolean;
+  invalidMessage: string;
 
   @Input() anagrams = [];
   @Output() anagramsChange = new EventEmitter();
@@ -20,38 +22,61 @@ export class SearchComponent implements OnInit {
   // Angular ngOnInit
   ngOnInit() {
     this.word = '';
+    this.isInvalid = false;
+    this.invalidMessage = '';
+  }
+
+  // Angular onSearchChange
+  onSearchChange(event: any) {
+    switch (true) {
+      case (event.indexOf(' ') >= 0):
+        this.isInvalid = true;
+        this.invalidMessage = 'No space char allowed';
+        break;
+      case (/[\|\!\?_\[\]\^\'\"£$%&\/()=*+\\]+/.test(event)):
+        this.isInvalid = true;
+        this.invalidMessage = 'No special char allowed';
+        break;
+      default:
+        this.isInvalid = false;
+        this.invalidMessage = '';
+        break;
+    }
   }
 
   // Clear input element
   clear() {
     this.word = '';
+    this.isInvalid = false;
+    this.invalidMessage = '';
     this.anagramsChange.emit({
-      status: 'results',
-      results: []
+      action: 'reset'
     });
   }
 
   // Get anagrams
   getAnagrams() {
-    this.anagramsChange.emit({
-      status: 'spinner',
-      results: true
-    });
-    this.apiservice.getAnagrams(this.word).subscribe({
-      next: data => {
-        this.anagramsChange.emit({
-          status: 'results',
-          results: data
-        });
-      },
-      error: error => {
-        console.error('Error while retrieving anagrams - ' + error.message);
-        this.anagramsChange.emit({
-          status: 'error',
-          results: 'Error: unable to retrieving anagrams.'
-        });
-      }
-    });
+    if (!this.isInvalid) {
+      this.anagramsChange.emit({
+        action: 'spinner',
+        results: true
+      });
+      this.apiservice.getAnagrams(this.word).subscribe({
+        next: data => {
+          this.anagramsChange.emit({
+            action: 'show-results',
+            results: data
+          });
+        },
+        error: error => {
+          console.error('Error while retrieving anagrams - ' + error.message);
+          this.anagramsChange.emit({
+            action: 'show-error',
+            results: 'Error: unable to retrieving anagrams. Check the server connection.'
+          });
+        }
+      });
+    }
   }
 
 }

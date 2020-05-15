@@ -5,7 +5,7 @@
     </div>
   </div>
 </ng-template>
-<ng-template [ngIf]="anagrams.length > 0">
+<ng-template [ngIf]="showAnagrams">
   <div class="results__result-container">
     <div class="results__bar">
       <div class="results__title">Results ({{anagrams.length}} items)</div>
@@ -15,13 +15,15 @@
     </div>
     <div class="results__result-list">
       <ul class="list-group list-group-flush">
-        <li class="list-group-item" *ngFor="let anagram of anagrams | paginate: { itemsPerPage: 10, currentPage: p }">
+        <li class="list-group-item"
+          *ngFor="let anagram of anagrams | paginate: { itemsPerPage: 10, currentPage: page }">
           {{ anagram }}
         </li>
       </ul>
     </div>
   </div>
   <div class="results__pagination-controll-container">
-    <pagination-controls (pageChange)="p = $event" autoHide="true" responsive="true" maxSize="6"></pagination-controls>
+    <pagination-controls (pageChange)="page = $event" autoHide="true" responsive="true" maxSize="6">
+    </pagination-controls>
   </div>
 </ng-template>

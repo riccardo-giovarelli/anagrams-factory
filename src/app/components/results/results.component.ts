@@ -10,24 +10,29 @@ import { ApiService } from 'src/app/services/api.service';
 
 export class ResultsComponent implements OnInit {
 
-  constructor(private apiservice: ApiService) { }
+  constructor(private apiservice: ApiService) {
 
-  p: number;
+    this.getFilteredResults = this.getFilteredResults.bind(this);
+  }
+
+  page: number;
 
   @Input() errorMessage = '';
   @Input() anagrams = [];
+  @Input() showAnagrams = false;
   @Output() dictionaryResults = new EventEmitter();
 
   // Angular ngOnInit
   ngOnInit() {
-    this.p = 1;
+    this.page = 1;
   }
 
   filterResults() {
     this.getFilteredResults().then((results: any) => {
-      // Do something asshole!!!
+
     });
   }
+
 
   // Resolve all the promise for search available word
   getFilteredResults() {

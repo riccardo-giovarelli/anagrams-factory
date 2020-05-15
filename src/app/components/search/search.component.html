@@ -1,13 +1,18 @@
-<div
-  [ngClass]="(anagrams.length === 0) ? 'search__container search__container--full' : 'search__container search__container--min'">
+<div class='search__container' search__container
+  [ngClass]="(anagrams.length === 0) ? 'search__container--full' : 'search__container--min'">
   <app-title [compact]="(anagrams.length > 0)"></app-title>
   <div
     [ngClass]="(anagrams.length === 0) ? 'search__input-container search__input-container--full' : 'search__input-container search__input-container--min'">
-    <input id="word-input" [(ngModel)]="word" type="text" class="form-control" />
+    <input id="word-input" [(ngModel)]="word" type="text" class="form-control" [ngClass]="isInvalid ? 'is-invalid' : ''"
+      (ngModelChange)="onSearchChange($event)" />
+    <div class="invalid-feedback search__invalid-feedback">
+      {{invalidMessage}}
+    </div>
   </div>
-  <div
-    [ngClass]="(anagrams.length === 0) ? 'search__button-container search__button-container--full' : 'search__button-container search__button-container--min'">
-    <button type="button" class="btn btn-primary search__button" (click)="getAnagrams()">Anagrams</button>
+  <div class='search__button-container'
+    [ngClass]="(anagrams.length === 0) ? 'search__button-container--full' : 'search__button-container--min'">
+    <button type="button" class="btn btn-primary search__button" [ngClass]="isInvalid ? 'disabled' : ''"
+      (click)="getAnagrams()">Anagrams</button>
     <button type="button" class="btn btn-secondary search__button" (click)="clear()">Reset</button>
   </div>
 </div>

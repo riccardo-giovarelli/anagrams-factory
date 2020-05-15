@@ -12,6 +12,7 @@ import { ApiService } from './services/api.service';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { ResultsComponent } from './components/results/results.component';
 import { SearchComponent } from './components/search/search.component';
+import { ProgressbarComponent } from './components/progressbar/progressbar.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { SearchComponent } from './components/search/search.component';
     TitleComponent,
     SpinnerComponent,
     ResultsComponent,
-    SearchComponent
+    SearchComponent,
+    ProgressbarComponent
   ],
   imports: [
     BrowserModule,

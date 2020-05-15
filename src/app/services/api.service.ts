@@ -25,7 +25,7 @@ export class ApiService {
   filterAnagrams(anagrams: Array<string>): Array<any> {
     if (anagrams !== undefined && anagrams !== []) {
       const url = config.baseUrl + config.endpoint.dictionary;
-      if (anagrams !== undefined && anagrams.length <= 50) {
+      if (anagrams.length <= 50) {
         return [this.http.post<any>(url, { list: anagrams }).toPromise()];
       } else {
         const numOfLoop = Math.ceil(anagrams.length / 50);
@@ -36,8 +36,8 @@ export class ApiService {
 
   // Return all the request
   getFilterAnagramsPromises(numOfLoop: number, url: string, anagrams: any): Array<any> {
-    return Array.from(Array(numOfLoop)).map((_, index: number) => {
-      this.http.post<any>(url, { list: anagrams.slice((index * 50), ((index + 1) * 50) - 1) }).toPromise();
-    });
+    return Array.from(Array(numOfLoop)).map((_, index: number) =>
+      this.http.post<any>(url, { list: anagrams.slice((index * 50), ((index + 1) * 50) - 1) }).toPromise()
+    );
   }
 }
