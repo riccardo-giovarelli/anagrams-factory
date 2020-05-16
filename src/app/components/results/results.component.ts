@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -11,28 +11,34 @@ import { ApiService } from 'src/app/services/api.service';
 export class ResultsComponent implements OnInit {
 
   constructor(private apiservice: ApiService) {
-
     this.getFilteredResults = this.getFilteredResults.bind(this);
   }
 
   page: number;
+  promiseTotal: number;
+  promisesDone: number;
+  filteringDone: boolean;
+
 
   @Input() errorMessage = '';
   @Input() anagrams = [];
-  @Input() showAnagrams = false;
-  @Output() dictionaryResults = new EventEmitter();
+  @Input() showDictionary = false;
+  @Input() showProgressbar = false;
+
 
   // Angular ngOnInit
   ngOnInit() {
     this.page = 1;
+    this.promiseTotal = 0;
+    this.promisesDone = 0;
+    this.filteringDone = false;
   }
 
   filterResults() {
     this.getFilteredResults().then((results: any) => {
-
+      console.log(results);
     });
   }
-
 
   // Resolve all the promise for search available word
   getFilteredResults() {

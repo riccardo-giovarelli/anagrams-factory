@@ -13,6 +13,8 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import { ResultsComponent } from './components/results/results.component';
 import { SearchComponent } from './components/search/search.component';
 import { ProgressbarComponent } from './components/progressbar/progressbar.component';
+import { DictionaryComponent } from './components/dictionary/dictionary.component';
+import { ErrorComponent } from './components/error/error.component';
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import { ProgressbarComponent } from './components/progressbar/progressbar.compo
     SpinnerComponent,
     ResultsComponent,
     SearchComponent,
-    ProgressbarComponent
+    ProgressbarComponent,
+    DictionaryComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
