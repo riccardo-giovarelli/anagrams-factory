@@ -1,22 +1,35 @@
-<div class="results__result-container">
-  <div class="results__bar">
-    <div class="results__title">Results ({{anagrams.length}} items)</div>
-    <div class="results__button-dictionary">
-      <button type="button" class="btn btn-dark" (click)="filterResults()">Find Words</button>
+<ng-template [ngIf]="!showProgressbar">
+  <div class="results__result-container">
+    <div class="results__bar">
+      <div class="results__title">Results ({{anagrams.length}} items)</div>
+      <div class="results__button-dictionary">
+        <button type="button" class="btn btn-dark" (click)="filterResults()">Find Words</button>
+      </div>
+    </div>
+    <div class="results__result-list">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"
+          *ngFor="let anagram of anagrams | paginate: { itemsPerPage: 10, currentPage: page }">
+          {{ anagram }}
+        </li>
+      </ul>
     </div>
   </div>
-  <div class="results__result-list">
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item" *ngFor="let anagram of anagrams | paginate: { itemsPerPage: 10, currentPage: page }">
-        {{ anagram }}
-      </li>
-    </ul>
+  <div class="results__pagination-controll-container">
+    <pagination-controls (pageChange)="page = $event" autoHide="true" responsive="true" maxSize="6">
+    </pagination-controls>
   </div>
-</div>
-<div class="results__pagination-controll-container">
-  <pagination-controls (pageChange)="page = $event" autoHide="true" responsive="true" maxSize="6">
-  </pagination-controls>
-</div>
+</ng-template>
 <ng-template [ngIf]="showProgressbar">
-  <app-progressbar></app-progressbar>
+  <div class="results__progressbar-container">
+    <div class="results__progressbar-title">
+      Searching...
+    </div>
+    <div class="results__progressbar-body">
+      <app-progressbar [total]='promiseTotal' [done]='promisesDone'></app-progressbar>
+    </div>
+    <div class="results__processor-text">
+      {{promisesDone}} / {{promiseTotal}} processors terminated
+    </div>
+  </div>
 </ng-template>

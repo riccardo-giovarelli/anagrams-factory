@@ -11,7 +11,7 @@ import { ApiService } from 'src/app/services/api.service';
 export class ResultsComponent implements OnInit {
 
   constructor(private apiservice: ApiService) {
-    this.getFilteredResults = this.getFilteredResults.bind(this);
+    this.setProgressbarStatus = this.setProgressbarStatus.bind(this);
   }
 
   page: number;
@@ -34,29 +34,49 @@ export class ResultsComponent implements OnInit {
     this.filteringDone = false;
   }
 
+  setProgressbarStatus(key: string, value: any) {
+    switch (key) {
+      case 'total':
+        this.promiseTotal = value;
+        break;
+      case 'done':
+        this.promisesDone = value;
+        break;
+      case 'end':
+        this.filteringDone = value;
+        break;
+    }
+  }
+
   filterResults() {
-    this.getFilteredResults().then((results: any) => {
-      console.log(results);
+    this.showProgressbar = true;
+    this.getFilteredResults(this.setProgressbarStatus).then((results: any) => {
     });
   }
 
   // Resolve all the promise for search available word
-  getFilteredResults() {
+  getFilteredResults(setProgressbarStatus: any) {
     const results: Array<any> = [];
-    let promiseCounter: number;
     const promisesResults = this.apiservice.filterAnagrams(this.anagrams);
+    setProgressbarStatus('total', promisesResults.length);
     return new Promise((resolve: any) => {
+      let promiseCounter = 0;
       promisesResults.forEach((promiseObj: any) => {
-        promiseObj.then((result: any) => {
-          result.json().then((response: any) => {
-            results.push(response);
+        promiseObj.subscribe({
+          next: (data: any) => {
+            if (data !== null) { results.push(data); }
             promiseCounter += 1;
+            setProgressbarStatus('done', promiseCounter);
             if (promiseCounter === promisesResults.length) {
+              setProgressbarStatus('end', true);
               resolve(results);
             }
-          });
-        }).catch((error: any) => {
-          console.error('Error resolving promise. Error:', error);
+          },
+          error: (error: any) => {
+            promiseCounter += 1;
+            setProgressbarStatus('done', promiseCounter);
+            console.error('Error resolving promise. Error:', error);
+          }
         });
       });
     });

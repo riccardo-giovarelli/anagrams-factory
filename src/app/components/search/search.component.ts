@@ -62,13 +62,13 @@ export class SearchComponent implements OnInit {
         results: true
       });
       this.apiservice.getAnagrams(this.word).subscribe({
-        next: data => {
+        next: (data: any) => {
           this.anagramsChange.emit({
             action: 'show-results',
             results: data
           });
         },
-        error: error => {
+        error: (error: any) => {
           console.error('Error while retrieving anagrams - ' + error.message);
           this.anagramsChange.emit({
             action: 'show-error',
