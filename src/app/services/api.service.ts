@@ -13,6 +13,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
+  promisesBucket = 50;
+
   // Return all the anagrams for a provided word
   getAnagrams(text: string) {
     if (text !== undefined && text !== '') {
@@ -25,10 +27,10 @@ export class ApiService {
   filterAnagrams(anagrams: Array<string>): Array<any> {
     if (anagrams !== undefined && anagrams !== []) {
       const url = config.baseUrl + config.endpoint.dictionary;
-      if (anagrams.length <= 50) {
+      if (anagrams.length <= this.promisesBucket) {
         return [this.http.post<any>(url, { list: anagrams })];
       } else {
-        const numOfLoop = Math.ceil(anagrams.length / 50);
+        const numOfLoop = Math.ceil(anagrams.length / this.promisesBucket);
         return this.getFilterAnagramsPromises(numOfLoop, url, anagrams);
       }
     }

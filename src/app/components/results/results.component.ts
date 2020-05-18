@@ -22,29 +22,31 @@ export class ResultsComponent {
   promisesSuccess = 0;
   promisesError = 0;
   filteringDone: false;
+  dop = 10;
   text = '';
-
 
   @Input() errorMessage = '';
   @Input() anagrams = [];
   @Input() showDictionary = false;
   @Input() showProgressbar = false;
 
-
   async filterResults() {
     this.showProgressbar = true;
     const results: Array<any> = [];
     const promisesResults = this.apiservice.filterAnagrams(this.anagrams);
-    const loop = (Math.floor(promisesResults.length / 10) + promisesResults.length % 10);
+    const loop = (Math.floor(promisesResults.length / this.dop) + promisesResults.length % this.dop);
     this.setProgressbarStatus('total', promisesResults.length);
     this.setProgressbarStatus('left', promisesResults.length);
     for (let i = 0; i < loop; i++) {
       const data = await this.getFilteredResults(
-        promisesResults.slice(i * 10, (i + 1) * 10),
+        promisesResults.slice(i * this.dop, (i + 1) * this.dop),
         this.setProgressbarStatus,
         this.getProgressbarStatus
       );
-      results.push(data);
+      const resultsArray = this.getResultsArray(data);
+      if (resultsArray !== null) {
+        results.push(resultsArray);
+      }
     }
   }
 
@@ -78,6 +80,14 @@ export class ResultsComponent {
         });
       });
     });
+  }
+
+  // Flat results in array
+  getResultsArray(data: any) {
+    const result: Array<any> = ((data !== undefined && Array.isArray(data)) ?
+      data.map((list: any) => (list !== undefined && Array.isArray(list)) ? (list.map((word: any) => word)) : null) : null)
+      .filter((item: any) => item != null);
+    return (result !== undefined && Array.isArray(result)) ? result.flat() : null;
   }
 
   setProgressbarStatus(key: string, value: any) {

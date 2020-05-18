@@ -83,7 +83,8 @@ def generateAnagrams(string):
             chars = swap(chars, start, i)
             counter[i] += 1
             i = 0
-            anagrams.append(''.join(chars).upper())
+            if ''.join(chars).upper() not in anagrams:
+                anagrams.append(''.join(chars).upper())
         else:
             counter[i] = 0
             i += 1
