@@ -23,13 +23,25 @@
 <ng-template [ngIf]="showProgressbar">
   <div class="results__progressbar-container">
     <div class="results__progressbar-title">
-      Searching...
+      Node left: <b>{{promisesLeft}}</b>
     </div>
     <div class="results__progressbar-body">
-      <app-progressbar [total]='promiseTotal' [done]='promisesDone'></app-progressbar>
+      <app-progressbar [type]="'info'" [total]='promiseTotal' [now]='promisesLeft' [min]='min' [text]=''>
+      </app-progressbar>
     </div>
-    <div class="results__processor-text">
-      {{promisesDone}} / {{promiseTotal}} processors terminated
+    <div class="results__progressbar-title">
+      Node success: <b>{{promisesSuccess}}</b>
+    </div>
+    <div class="results__progressbar-body">
+      <app-progressbar [type]="'success'" [total]='promiseTotal' [now]='promisesSuccess' [min]='min' [text]=''>
+      </app-progressbar>
+    </div>
+    <div class="results__progressbar-title">
+      Node error: <b>{{promisesError}}</b>
+    </div>
+    <div class="results__progressbar-body">
+      <app-progressbar [type]="'danger'" [total]='promiseTotal' [now]='promisesError' [min]='min' [text]=''>
+      </app-progressbar>
     </div>
   </div>
 </ng-template>

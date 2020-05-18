@@ -1,5 +1,5 @@
 <div class="progress" style="height: 40px;">
-  <div class="progress-bar" role="progressbar" [ngStyle]="{'width': donePercent}" [attr.aria-valuenow]="done"
-    aria-valuemin="0" [attr.aria-valuemax]="total">{{donePercent}}
+  <div [class]="componentClass" role="progressbar" [ngStyle]="{'width': donePercent}" [attr.aria-valuenow]="now"
+    [attr.aria-valuemin]="min" [attr.aria-valuemax]="total">{{donePercent}}%
   </div>
 </div>

@@ -8,16 +8,21 @@ import { ApiService } from 'src/app/services/api.service';
   providers: [ApiService]
 })
 
-export class ResultsComponent implements OnInit {
+export class ResultsComponent {
 
   constructor(private apiservice: ApiService) {
     this.setProgressbarStatus = this.setProgressbarStatus.bind(this);
+    this.getProgressbarStatus = this.getProgressbarStatus.bind(this);
   }
 
-  page: number;
-  promiseTotal: number;
-  promisesDone: number;
-  filteringDone: boolean;
+  page = 1;
+  min = 0;
+  promiseTotal = 0;
+  promisesLeft = 0;
+  promisesSuccess = 0;
+  promisesError = 0;
+  filteringDone: false;
+  text = '';
 
 
   @Input() errorMessage = '';
@@ -26,12 +31,53 @@ export class ResultsComponent implements OnInit {
   @Input() showProgressbar = false;
 
 
-  // Angular ngOnInit
-  ngOnInit() {
-    this.page = 1;
-    this.promiseTotal = 0;
-    this.promisesDone = 0;
-    this.filteringDone = false;
+  async filterResults() {
+    this.showProgressbar = true;
+    const results: Array<any> = [];
+    const promisesResults = this.apiservice.filterAnagrams(this.anagrams);
+    const loop = (Math.floor(promisesResults.length / 10) + promisesResults.length % 10);
+    this.setProgressbarStatus('total', promisesResults.length);
+    this.setProgressbarStatus('left', promisesResults.length);
+    for (let i = 0; i < loop; i++) {
+      const data = await this.getFilteredResults(
+        promisesResults.slice(i * 10, (i + 1) * 10),
+        this.setProgressbarStatus,
+        this.getProgressbarStatus
+      );
+      results.push(data);
+    }
+  }
+
+  // Resolve all the promise for search available word
+  getFilteredResults(promises: any, setProgressbarStatus: any, getProgressbarStatus: any) {
+    return new Promise((resolve: any) => {
+      const results: Array<any> = [];
+      let promiseCounter = 0;
+      let errorCounter = getProgressbarStatus('error');
+      let promiseSuccess = getProgressbarStatus('success');
+      promises.forEach((promiseObj: any) => {
+        promiseObj.subscribe({
+          next: (data: any) => {
+            if (data !== null) { results.push(data); }
+            promiseCounter += 1;
+            promiseSuccess += 1;
+            setProgressbarStatus('success', getProgressbarStatus('success') + 1);
+            setProgressbarStatus('left', getProgressbarStatus('left') - 1);
+            if (promiseCounter === promises.length) {
+              setProgressbarStatus('end', true);
+              resolve(results);
+            }
+          },
+          error: (error: any) => {
+            promiseCounter += 1;
+            errorCounter += 1;
+            setProgressbarStatus('error', getProgressbarStatus('error') + 1);
+            setProgressbarStatus('left', getProgressbarStatus('left') - 1);
+            console.error('Error resolving promise. Error:', error);
+          }
+        });
+      });
+    });
   }
 
   setProgressbarStatus(key: string, value: any) {
@@ -39,46 +85,28 @@ export class ResultsComponent implements OnInit {
       case 'total':
         this.promiseTotal = value;
         break;
-      case 'done':
-        this.promisesDone = value;
+      case 'success':
+        this.promisesSuccess = value;
         break;
-      case 'end':
-        this.filteringDone = value;
+      case 'error':
+        this.promisesError = value;
+        break;
+      case 'left':
+        this.promisesLeft = value;
         break;
     }
   }
 
-  filterResults() {
-    this.showProgressbar = true;
-    this.getFilteredResults(this.setProgressbarStatus).then((results: any) => {
-    });
-  }
-
-  // Resolve all the promise for search available word
-  getFilteredResults(setProgressbarStatus: any) {
-    const results: Array<any> = [];
-    const promisesResults = this.apiservice.filterAnagrams(this.anagrams);
-    setProgressbarStatus('total', promisesResults.length);
-    return new Promise((resolve: any) => {
-      let promiseCounter = 0;
-      promisesResults.forEach((promiseObj: any) => {
-        promiseObj.subscribe({
-          next: (data: any) => {
-            if (data !== null) { results.push(data); }
-            promiseCounter += 1;
-            setProgressbarStatus('done', promiseCounter);
-            if (promiseCounter === promisesResults.length) {
-              setProgressbarStatus('end', true);
-              resolve(results);
-            }
-          },
-          error: (error: any) => {
-            promiseCounter += 1;
-            setProgressbarStatus('done', promiseCounter);
-            console.error('Error resolving promise. Error:', error);
-          }
-        });
-      });
-    });
+  getProgressbarStatus(key: string) {
+    switch (key) {
+      case 'total':
+        return this.promiseTotal;
+      case 'success':
+        return this.promisesSuccess;
+      case 'error':
+        return this.promisesError;
+      case 'left':
+        return this.promisesLeft;
+    }
   }
 }
