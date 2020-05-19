@@ -3,7 +3,7 @@
     <div class="results__bar">
       <div class="results__title">Results ({{anagrams.length}} items)</div>
       <div class="results__button-dictionary">
-        <button type="button" class="btn btn-dark" (click)="filterResults()">Find Words</button>
+        <button type="button" class="btn btn-primary btn-lg" (click)="filterResults()">Find Words</button>
       </div>
     </div>
     <div class="results__result-list">
@@ -29,19 +29,23 @@
       <app-progressbar [type]="'info'" [total]='promiseTotal' [now]='promisesLeft' [min]='min' [text]=''>
       </app-progressbar>
     </div>
-    <div class="results__progressbar-title">
-      Node success: <b>{{promisesSuccess}}</b>
-    </div>
-    <div class="results__progressbar-body">
-      <app-progressbar [type]="'success'" [total]='promiseTotal' [now]='promisesSuccess' [min]='min' [text]=''>
-      </app-progressbar>
-    </div>
-    <div class="results__progressbar-title">
-      Node error: <b>{{promisesError}}</b>
-    </div>
-    <div class="results__progressbar-body">
-      <app-progressbar [type]="'danger'" [total]='promiseTotal' [now]='promisesError' [min]='min' [text]=''>
-      </app-progressbar>
-    </div>
+    <ng-template [ngIf]="promisesSuccess > 0">
+      <div class="results__progressbar-title">
+        Node success: <b>{{promisesSuccess}}</b>
+      </div>
+      <div class="results__progressbar-body">
+        <app-progressbar [type]="'success'" [total]='promiseTotal' [now]='promisesSuccess' [min]='min' [text]=''>
+        </app-progressbar>
+      </div>
+    </ng-template>
+    <ng-template [ngIf]="promisesError > 0">
+      <div class="results__progressbar-title">
+        Node error: <b>{{promisesError}}</b>
+      </div>
+      <div class="results__progressbar-body">
+        <app-progressbar [type]="'danger'" [total]='promiseTotal' [now]='promisesError' [min]='min' [text]=''>
+        </app-progressbar>
+      </div>
+    </ng-template>
   </div>
 </ng-template>

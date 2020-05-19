@@ -34,7 +34,7 @@ export class ResultsComponent {
     this.showProgressbar = true;
     const results: Array<any> = [];
     const promisesResults = this.apiservice.filterAnagrams(this.anagrams);
-    const loop = (Math.floor(promisesResults.length / this.dop) + promisesResults.length % this.dop);
+    const loop = Math.floor(promisesResults.length / this.dop) + (promisesResults.length % this.dop > 0 ? 1 : 0);
     this.setProgressbarStatus('total', promisesResults.length);
     this.setProgressbarStatus('left', promisesResults.length);
     for (let i = 0; i < loop; i++) {
@@ -48,6 +48,7 @@ export class ResultsComponent {
         results.push(resultsArray);
       }
     }
+    console.log('RESULTS!!!', results);
   }
 
   // Resolve all the promise for search available word
@@ -76,6 +77,7 @@ export class ResultsComponent {
             setProgressbarStatus('error', getProgressbarStatus('error') + 1);
             setProgressbarStatus('left', getProgressbarStatus('left') - 1);
             console.error('Error resolving promise. Error:', error);
+            resolve(results);
           }
         });
       });
@@ -84,10 +86,10 @@ export class ResultsComponent {
 
   // Flat results in array
   getResultsArray(data: any) {
-    const result: Array<any> = ((data !== undefined && Array.isArray(data)) ?
-      data.map((list: any) => (list !== undefined && Array.isArray(list)) ? (list.map((word: any) => word)) : null) : null)
-      .filter((item: any) => item != null);
-    return (result !== undefined && Array.isArray(result)) ? result.flat() : null;
+    const result: Array<any> = ((data !== undefined && Array.isArray(data) && data.length > 0) ?
+      data.map((list: any) => (list !== undefined && Array.isArray(list) && list.length > 0) ?
+        (list.map((word: any) => word)) : null) : null);
+    return (result !== undefined && Array.isArray(result) && result.length > 0) ? result.filter((item: any) => item != null).flat() : null;
   }
 
   setProgressbarStatus(key: string, value: any) {
