@@ -10,6 +10,7 @@ import { ApiService } from 'src/app/services/api.service';
 export class AppComponent implements OnInit {
 
   anagrams: Array<string>;
+  words: Array<any>;
   errorMessage: string;
   spinnerVisibility: boolean;
   showResults: boolean;
@@ -63,6 +64,15 @@ export class AppComponent implements OnInit {
         this.showResults = false;
         this.showDictionary = false;
         this.showProgressbar = false;
+        break;
+      case 'dictionary':
+        this.errorMessage = '';
+        this.showError = false;
+        this.spinnerVisibility = false;
+        this.showResults = false;
+        this.showDictionary = true;
+        this.showProgressbar = false;
+        this.words = result.results;
         break;
     }
   }

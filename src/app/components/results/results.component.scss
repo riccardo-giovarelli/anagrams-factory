@@ -59,11 +59,18 @@
 .results__progressbar-container {
   margin-top: 60px;
 
+  .results__progressbar-header {
+    width: 80%;
+    margin: auto;
+    font-size: 1.6em;
+    padding-bottom: 20px;
+  }
+
   .results__progressbar-title{
     width: 80%;
     margin: auto;
     font-size: 1.2em;
-    padding: 0px 0px 5px 5px;
+    padding: 10px 0px 5px 5px;
   }
 
   .results__progressbar-body {

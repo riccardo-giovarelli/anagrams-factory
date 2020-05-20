@@ -9,6 +9,8 @@ export class DictionaryComponent implements OnInit {
 
   constructor() { }
 
+  @Input() words: Array<any>;
+
   ngOnInit(): void {
   }
 

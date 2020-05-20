@@ -22,6 +22,9 @@
 </ng-template>
 <ng-template [ngIf]="showProgressbar">
   <div class="results__progressbar-container">
+    <div class="results__progressbar-header">
+      Searching for words in anagrams...
+    </div>
     <div class="results__progressbar-title">
       Node left: <b>{{promisesLeft}}</b>
     </div>
@@ -46,6 +49,9 @@
         <app-progressbar [type]="'danger'" [total]='promiseTotal' [now]='promisesError' [min]='min' [text]=''>
         </app-progressbar>
       </div>
+    </ng-template>
+    <ng-template [ngIf]="promisesError > 0">
+
     </ng-template>
   </div>
 </ng-template>

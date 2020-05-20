@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -21,14 +21,15 @@ export class ResultsComponent {
   promisesLeft = 0;
   promisesSuccess = 0;
   promisesError = 0;
-  filteringDone: false;
   dop = 10;
   text = '';
+  filteringDone: false;
 
   @Input() errorMessage = '';
   @Input() anagrams = [];
   @Input() showDictionary = false;
   @Input() showProgressbar = false;
+  @Output() anagramsChange = new EventEmitter();
 
   async filterResults() {
     this.showProgressbar = true;
@@ -48,7 +49,10 @@ export class ResultsComponent {
         results.push(resultsArray);
       }
     }
-    console.log('RESULTS!!!', results);
+    this.anagramsChange.emit({
+      action: 'dictionary',
+      results: results.flat(2)
+    });
   }
 
   // Resolve all the promise for search available word
@@ -89,7 +93,7 @@ export class ResultsComponent {
     const result: Array<any> = ((data !== undefined && Array.isArray(data) && data.length > 0) ?
       data.map((list: any) => (list !== undefined && Array.isArray(list) && list.length > 0) ?
         (list.map((word: any) => word)) : null) : null);
-    return (result !== undefined && Array.isArray(result) && result.length > 0) ? result.filter((item: any) => item != null).flat() : null;
+    return (result !== undefined && Array.isArray(result) && result.length > 0) ? result.filter((item: any) => item != null) : null;
   }
 
   setProgressbarStatus(key: string, value: any) {
