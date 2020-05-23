@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, map, tap } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 import config from '../../config/service';
 
@@ -39,7 +37,7 @@ export class ApiService {
   // Return all the request
   getFilterAnagramsPromises(numOfLoop: number, url: string, anagrams: any): Array<any> {
     return Array.from(Array(numOfLoop)).map((_, index: number) =>
-      this.http.post<any>(url, { list: anagrams.slice((index * 50), ((index + 1) * 50) - 1) })
+      this.http.post<any>(url, { list: anagrams.slice((index * 50), ((index + 1) * 50)) })
     );
   }
 }

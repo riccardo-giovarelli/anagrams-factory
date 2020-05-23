@@ -11,67 +11,52 @@ export class AppComponent implements OnInit {
 
   anagrams: Array<string>;
   words: Array<any>;
-  errorMessage: string;
   spinnerVisibility: boolean;
   showResults: boolean;
   showDictionary: boolean;
   showProgressbar: boolean;
-  showError: boolean;
+  showSearch: boolean;
 
   ngOnInit() {
     this.anagrams = [];
-    this.errorMessage = '';
     this.spinnerVisibility = false;
     this.showDictionary = false;
     this.showResults = false;
     this.showProgressbar = false;
-    this.showError = false;
+    this.showSearch = true;
   }
 
   setAnagramsResults(result: any) {
     switch (result.action) {
       case 'show-results':
-        this.errorMessage = '';
-        this.showError = false;
         this.anagrams = result.results;
         this.spinnerVisibility = false;
         this.showResults = true;
         this.showDictionary = false;
         this.showProgressbar = false;
+        this.showSearch = false;
         break;
       case 'reset':
-        this.errorMessage = '';
-        this.showError = false;
         this.anagrams = [];
         this.spinnerVisibility = false;
         this.showResults = false;
         this.showDictionary = false;
         this.showProgressbar = false;
-        break;
-      case 'show-error':
-        this.anagrams = [];
-        this.errorMessage = result.results;
-        this.showError = true;
-        this.spinnerVisibility = false;
-        this.showResults = false;
-        this.showDictionary = false;
-        this.showProgressbar = false;
+        this.showSearch = true;
         break;
       case 'spinner':
-        this.errorMessage = '';
-        this.showError = false;
         this.spinnerVisibility = result.results;
         this.showResults = false;
         this.showDictionary = false;
         this.showProgressbar = false;
+        this.showSearch = false;
         break;
       case 'dictionary':
-        this.errorMessage = '';
-        this.showError = false;
         this.spinnerVisibility = false;
         this.showResults = false;
         this.showDictionary = true;
         this.showProgressbar = false;
+        this.showSearch = false;
         this.words = result.results;
         break;
     }

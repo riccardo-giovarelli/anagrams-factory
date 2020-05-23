@@ -23,14 +23,31 @@ export class ResultsComponent {
   promisesError = 0;
   dop = 10;
   text = '';
-  filteringDone: false;
+  filteringDone = false;
+  showContinue = false;
+  results = [];
 
-  @Input() errorMessage = '';
   @Input() anagrams = [];
-  @Input() showDictionary = false;
   @Input() showProgressbar = false;
   @Output() anagramsChange = new EventEmitter();
 
+  // Empty anagrams results and return to search
+  emptyResults() {
+    this.anagramsChange.emit({
+      action: 'reset',
+      results: null
+    });
+  }
+
+  // Open the dictionary functionalities
+  goToDictionary() {
+    this.anagramsChange.emit({
+      action: 'dictionary',
+      results: this.results
+    });
+  }
+
+  // Get the words from the anagrams
   async filterResults() {
     this.showProgressbar = true;
     const results: Array<any> = [];
@@ -49,10 +66,9 @@ export class ResultsComponent {
         results.push(resultsArray);
       }
     }
-    this.anagramsChange.emit({
-      action: 'dictionary',
-      results: results.flat(2)
-    });
+    this.showContinue = true;
+    this.results = results.flat(2);
+
   }
 
   // Resolve all the promise for search available word
@@ -96,6 +112,7 @@ export class ResultsComponent {
     return (result !== undefined && Array.isArray(result) && result.length > 0) ? result.filter((item: any) => item != null) : null;
   }
 
+  // Set value for progress bar
   setProgressbarStatus(key: string, value: any) {
     switch (key) {
       case 'total':
@@ -113,6 +130,7 @@ export class ResultsComponent {
     }
   }
 
+  // Get value from progress bar
   getProgressbarStatus(key: string) {
     switch (key) {
       case 'total':

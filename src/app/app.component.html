@@ -1,14 +1,11 @@
 <app-spinner [visible]='spinnerVisibility'></app-spinner>
 <div class="app__container">
-  <app-search [anagrams]='anagrams' (anagramsChange)='setAnagramsResults($event)'></app-search>
+  <app-search [showSearch]='showSearch' (anagramsChange)='setAnagramsResults($event)'></app-search>
   <ng-template [ngIf]="showResults">
-    <app-results [errorMessage]='errorMessage' [anagrams]='anagrams' (anagramsChange)='setAnagramsResults($event)'>
+    <app-results [anagrams]='anagrams' (anagramsChange)='setAnagramsResults($event)'>
     </app-results>
   </ng-template>
   <ng-template [ngIf]="showDictionary">
     <app-dictionary [words]='words'></app-dictionary>
-  </ng-template>
-  <ng-template [ngIf]="showError">
-    <app-error [errorMessage]='errorMessage'></app-error>
   </ng-template>
 </div>

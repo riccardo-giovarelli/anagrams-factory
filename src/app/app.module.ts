@@ -7,26 +7,22 @@ import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TitleComponent } from './components/title/title.component';
 import { ApiService } from './services/api.service';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { ResultsComponent } from './components/results/results.component';
 import { SearchComponent } from './components/search/search.component';
 import { ProgressbarComponent } from './components/progressbar/progressbar.component';
 import { DictionaryComponent } from './components/dictionary/dictionary.component';
-import { ErrorComponent } from './components/error/error.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    TitleComponent,
     SpinnerComponent,
     ResultsComponent,
     SearchComponent,
     ProgressbarComponent,
-    DictionaryComponent,
-    ErrorComponent
+    DictionaryComponent
   ],
   imports: [
     BrowserModule,

@@ -13,9 +13,10 @@ export class SearchComponent implements OnInit {
   word: string;
   isInvalid: boolean;
   invalidMessage: string;
+  title: string;
 
-  @Input() anagrams = [];
   @Output() anagramsChange = new EventEmitter();
+  @Input() showSearch: boolean;
 
   constructor(private apiservice: ApiService) { }
 
@@ -24,6 +25,7 @@ export class SearchComponent implements OnInit {
     this.word = '';
     this.isInvalid = false;
     this.invalidMessage = '';
+    this.title = 'Anagrams Factory';
   }
 
   // Angular onSearchChange
