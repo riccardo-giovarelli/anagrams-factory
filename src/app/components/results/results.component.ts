@@ -41,32 +41,28 @@ export class ResultsComponent {
   dop = 10;
   text = '';
   filteringDone = false;
-  showContinue = false;
   results = [];
 
-  @Input() anagrams = [];
-  @Input() showProgressbar = false;
+  @Input() anagrams: Array<string>;
+  @Input() showProgressbar: boolean;
+  @Input() showContinue: boolean;
   @Output() anagramsChange = new EventEmitter();
-
-  // Empty anagrams results and return to search
-  emptyResults() {
-    this.anagramsChange.emit({
-      action: 'reset',
-      results: null
-    });
-  }
 
   // Open the dictionary functionalities
   goToDictionary() {
     this.anagramsChange.emit({
       action: 'dictionary',
-      results: this.results
+      results: Array.isArray(this.results) && this.results.length > 0 ? this.results : null
     });
   }
 
   // Get the words from the anagrams
   async filterResults() {
     this.showProgressbar = true;
+    this.anagramsChange.emit({
+      action: 'progressbar',
+      results: true
+    });
     const results: Array<any> = [];
     const promisesResults = this.apiservice.filterAnagrams(this.anagrams);
     const loop = Math.floor(promisesResults.length / this.dop) + (promisesResults.length % this.dop > 0 ? 1 : 0);

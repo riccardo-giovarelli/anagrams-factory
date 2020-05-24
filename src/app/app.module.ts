@@ -30,6 +30,7 @@ import { ResultsComponent } from './components/results/results.component';
 import { SearchComponent } from './components/search/search.component';
 import { ProgressbarComponent } from './components/progressbar/progressbar.component';
 import { DictionaryComponent } from './components/dictionary/dictionary.component';
+import { StepbarComponent } from './components/stepbar/stepbar.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { DictionaryComponent } from './components/dictionary/dictionary.componen
     ResultsComponent,
     SearchComponent,
     ProgressbarComponent,
-    DictionaryComponent
+    DictionaryComponent,
+    StepbarComponent
   ],
   imports: [
     BrowserModule,

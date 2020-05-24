@@ -1,3 +1,5 @@
+@import './../../../variables.scss';
+
 .dictionary__container {
 
   .dictionary__header {
@@ -6,7 +8,7 @@
     flex-wrap: nowrap;
     align-items: center;
     padding: 10px 30px;
-    background-color: darkgray;
+    background-color: $main__palette-1;
     color: whitesmoke;
 
     .dictionary__header-left {

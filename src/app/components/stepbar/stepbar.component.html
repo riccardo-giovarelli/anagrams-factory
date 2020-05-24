@@ -1,0 +1,18 @@
+<div class="stepbar__container">
+  <div class="stepbar__item-container stepbar__generate-container enabled" (click)="backToSearchAnagrams()">
+    GENERATE ANAGRAMS
+  </div>
+  <div class="stepbar__item-container stepbar__anagrams-results-container"
+    [ngClass]="(showResults || showProgressbar || showDictionary)?'enabled':'disabled'"
+    (click)="backToAnagramsResults()">
+    ANAGRAMS RESULTS
+  </div>
+  <div class="stepbar__item-container stepbar__dictionary-progress-container"
+    [ngClass]="(showProgressbar || showDictionary)?'enabled':'disabled'" (click)="backToDictionarySearch()">
+    DICTIONARY SEARCH
+  </div>
+  <div class="stepbar__item-container stepbar__dictionary-results-container"
+    [ngClass]="(showDictionary)?'enabled':'disabled'">
+    DICTIONARY RESULTS
+  </div>
+</div>

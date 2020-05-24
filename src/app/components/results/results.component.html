@@ -1,20 +1,10 @@
 <ng-template [ngIf]="!showProgressbar">
-  <div class="results__header">
-    <div class="results__header-left">
-      Anagrams Results
-    </div>
-    <div class="results__header-right">
-      {{anagrams.length}} anagrams
-    </div>
+  <div class="results__results-text">
+    Found {{anagrams.length}} anagrams
   </div>
   <div class="results__result-container">
     <div class="results__bar">
-      <div class="results__bar-left">
-        <button type="button" class="btn btn-primary btn-lg" (click)="filterResults()">DICTIONARY SEARCH</button>
-      </div>
-      <div class="results__bar-right">
-        <button type="button" class="btn btn-secondary btn-lg" (click)="emptyResults()">CANCEL</button>
-      </div>
+      <button type="button" class="btn btn-primary btn-lg" (click)="filterResults()">DICTIONARY SEARCH</button>
     </div>
     <div class="results__result-list">
       <ul class="list-group list-group-flush">

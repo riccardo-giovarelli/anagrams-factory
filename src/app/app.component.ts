@@ -33,20 +33,24 @@ export class AppComponent implements OnInit {
   showDictionary: boolean;
   showProgressbar: boolean;
   showSearch: boolean;
+  showContinue: boolean;
+
 
   ngOnInit() {
     this.anagrams = [];
+    this.words = [];
     this.spinnerVisibility = false;
     this.showDictionary = false;
     this.showResults = false;
     this.showProgressbar = false;
     this.showSearch = true;
+    this.showContinue = false;
   }
 
   setAnagramsResults(result: any) {
     switch (result.action) {
       case 'show-results':
-        this.anagrams = result.results;
+        if (result.results !== null) { this.anagrams = result.results; }
         this.spinnerVisibility = false;
         this.showResults = true;
         this.showDictionary = false;
@@ -54,7 +58,6 @@ export class AppComponent implements OnInit {
         this.showSearch = false;
         break;
       case 'reset':
-        this.anagrams = [];
         this.spinnerVisibility = false;
         this.showResults = false;
         this.showDictionary = false;
@@ -74,7 +77,13 @@ export class AppComponent implements OnInit {
         this.showDictionary = true;
         this.showProgressbar = false;
         this.showSearch = false;
-        this.words = result.results;
+        if (result.results !== null) { this.words = result.results; }
+        break;
+      case 'progressbar':
+        this.showProgressbar = true;
+        this.showDictionary = false;
+        this.showResults = true;
+        this.showContinue = true;
         break;
     }
   }

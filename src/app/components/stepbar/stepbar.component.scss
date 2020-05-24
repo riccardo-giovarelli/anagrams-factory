@@ -1,0 +1,67 @@
+
+@import './../../../variables.scss';
+
+$stepbar__height: 40px;
+$stepbar__half-height: 20px;
+
+.stepbar__container {
+  width: 100%;
+  padding: 5px 5px;
+
+  .stepbar__item-container {
+    display: inline-block;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+    width: calc(25% - 20px);
+    margin-right: 20px;
+    position:relative;
+    background-color: $main__palette-0;
+    color: $font__color-0;
+    font-weight: bold;
+
+    &.enabled {
+      background-color: $main__palette-0;
+
+      &:after {
+        border-left: 20px solid $main__palette-0;
+      }
+    }
+
+    &.disabled {
+      background-color: $main__palette-1;
+
+      &:after {
+        border-left: 20px solid $main__palette-1;
+      }
+    }
+
+    &:after{
+      content:"";
+      position:absolute;
+      height:0;
+      width:0;
+      left:100%;
+      top:0;
+      border: 20px solid transparent;
+      z-index: 300;
+    }
+  }
+
+  .stepbar__generate-container,
+  .stepbar__anagrams-results-container,
+  .stepbar__dictionary-progress-container {
+
+    &.enabled {
+      cursor: pointer;
+    }
+
+    &.disabled {
+      cursor: not-allowed
+    }
+  }
+
+  .stepbar__dictionary-results-container {
+    cursor: not-allowed;
+  }
+}
