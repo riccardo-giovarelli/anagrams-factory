@@ -1,11 +1,11 @@
 <app-spinner [visible]='spinnerVisibility'></app-spinner>
 <app-stepbar [showResults]='showResults' [showDictionary]='showDictionary' [showProgressbar]='showProgressbar'
-  [showSearch]='showSearch' (anagramsChange)='setAnagramsResults($event)'></app-stepbar>
+  [showSearch]='showSearch' (anagramsChange)='setAppStatus($event)'></app-stepbar>
 <div class="app__container">
-  <app-search [showSearch]='showSearch' (anagramsChange)='setAnagramsResults($event)'></app-search>
+  <app-search [showSearch]='showSearch' (anagramsChange)='setAppStatus($event)'></app-search>
   <ng-template [ngIf]="showResults">
     <app-results [anagrams]='anagrams' [showProgressbar]='showProgressbar' [showContinue]='showContinue'
-      (anagramsChange)='setAnagramsResults($event)'>
+      (anagramsChange)='setAppStatus($event)'>
     </app-results>
   </ng-template>
   <ng-template [ngIf]="showDictionary">

@@ -57,9 +57,11 @@
 
   .results__progressbar-header {
     width: 80%;
-    margin: auto;
+    margin: auto auto 15px auto;
     font-size: 1.6em;
-    padding-bottom: 20px;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: $main__palette-2;
   }
 
   .results__progressbar-title{

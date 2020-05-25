@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
     this.showContinue = false;
   }
 
-  setAnagramsResults(result: any) {
+  setAppStatus(result: any) {
     switch (result.action) {
       case 'show-results':
         if (result.results !== null) { this.anagrams = result.results; }
