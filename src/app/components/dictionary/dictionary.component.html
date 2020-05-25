@@ -1,10 +1,18 @@
 <div class="dictionary__container">
-  <div class="dictionary__header">
-    <div class="dictionary__header-left">
-      Dictionary Results
-    </div>
-    <div class="dictionary__header-right">
-      {{words.length}} words
-    </div>
+  <div class="dictionary__table-container table-responsive-md">
+    <table class="table">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">WORD</th>
+          <th scope="col">DEFINITION</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let word of words">
+          <td>{{word.world}}</td>
+          <td>{{word.definition}}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

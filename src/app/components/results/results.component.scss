@@ -1,8 +1,11 @@
+@import './../../../variables.scss';
+
 .results__results-text {
   width: 80%;
   margin: auto;
   font-size: 1.6em;
-  margin-top: 60px
+  margin-top: 50px;
+  margin-bottom: 60px;
 }
 
 .results__result-container {
@@ -56,7 +59,7 @@
     width: 80%;
     margin: auto;
     font-size: 1.6em;
-    padding-bottom: 30px;
+    padding-bottom: 20px;
   }
 
   .results__progressbar-title{

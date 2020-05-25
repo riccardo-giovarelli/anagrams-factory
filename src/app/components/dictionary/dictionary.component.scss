@@ -1,26 +1,9 @@
 @import './../../../variables.scss';
 
 .dictionary__container {
-
-  .dictionary__header {
-    width: 100%;
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
-    padding: 10px 30px;
-    background-color: $main__palette-1;
-    color: whitesmoke;
-
-    .dictionary__header-left {
-      font-size: 3em;
-      text-align: left;
-      flex-grow: 2;
-    }
-
-    .dictionary__header-right {
-      font-size: 1.5em;
-      text-align: right;
-      flex-grow: 1;
-    }
+  .dictionary__table-container {
+    width: 80%;
+    margin: auto;
+    margin-top: 50px;
   }
 }

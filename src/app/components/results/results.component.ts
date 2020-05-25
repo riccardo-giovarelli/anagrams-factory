@@ -58,10 +58,9 @@ export class ResultsComponent {
 
   // Get the words from the anagrams
   async filterResults() {
-    this.showProgressbar = true;
     this.anagramsChange.emit({
       action: 'progressbar',
-      results: true
+      results: null
     });
     const results: Array<any> = [];
     const promisesResults = this.apiservice.filterAnagrams(this.anagrams);

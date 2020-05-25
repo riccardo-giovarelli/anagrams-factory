@@ -56,6 +56,7 @@ export class AppComponent implements OnInit {
         this.showDictionary = false;
         this.showProgressbar = false;
         this.showSearch = false;
+        this.showContinue = false;
         break;
       case 'reset':
         this.spinnerVisibility = false;
@@ -63,6 +64,7 @@ export class AppComponent implements OnInit {
         this.showDictionary = false;
         this.showProgressbar = false;
         this.showSearch = true;
+        this.showContinue = false;
         break;
       case 'spinner':
         this.spinnerVisibility = result.results;
@@ -70,6 +72,7 @@ export class AppComponent implements OnInit {
         this.showDictionary = false;
         this.showProgressbar = false;
         this.showSearch = false;
+        this.showContinue = false;
         break;
       case 'dictionary':
         this.spinnerVisibility = false;
@@ -77,6 +80,7 @@ export class AppComponent implements OnInit {
         this.showDictionary = true;
         this.showProgressbar = false;
         this.showSearch = false;
+        this.showContinue = false;
         if (result.results !== null) { this.words = result.results; }
         break;
       case 'progressbar':

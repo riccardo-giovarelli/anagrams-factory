@@ -1,6 +1,8 @@
 <ng-template [ngIf]="!showProgressbar">
   <div class="results__results-text">
-    Found {{anagrams.length}} anagrams
+    <div class="alert alert-primary" role="alert">
+      Found {{anagrams.length}} anagrams
+    </div>
   </div>
   <div class="results__result-container">
     <div class="results__bar">
