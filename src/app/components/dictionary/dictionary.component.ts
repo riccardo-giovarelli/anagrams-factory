@@ -26,9 +26,12 @@ export class DictionaryComponent implements OnInit {
 
   constructor() { }
 
+  page: number;
+
   @Input() words: Array<any>;
 
   ngOnInit(): void {
+    this.page = 1;
   }
 
 }

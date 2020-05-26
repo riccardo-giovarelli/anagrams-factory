@@ -1,9 +1,17 @@
 @import './../../../variables.scss';
 
 .dictionary__container {
+
   .dictionary__table-container {
     width: 80%;
     margin: auto;
     margin-top: 50px;
+  }
+
+  .dictionary__table-controller {
+    width: 80%;
+    margin: auto;
+    margin-top: 20px;
+    text-align: center;
   }
 }
