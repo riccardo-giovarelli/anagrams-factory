@@ -3,10 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "ng": "ng",
-    "create-server": "docker build -t anagrams-factory-server .",
-    "dev-client": "ng serve",
-    "dev-server": "docker run -p 8099:8099 anagrams-factory-server",
-    "clean-server": "docker stop anagrams-factory-server && docker rm anagrams-factory-server",
+    "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
