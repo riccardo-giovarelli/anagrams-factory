@@ -42,6 +42,7 @@ export class ResultsComponent {
   text = '';
   filteringDone = false;
   results = [];
+  checked = 0;
 
   @Input() anagrams: Array<string>;
   @Input() showProgressbar: boolean;
@@ -98,6 +99,7 @@ export class ResultsComponent {
             promiseSuccess += 1;
             setProgressbarStatus('success', getProgressbarStatus('success') + 1);
             setProgressbarStatus('left', getProgressbarStatus('left') - 1);
+            this.checked = promiseSuccess * this.dop;
             if (promiseCounter === promises.length) {
               setProgressbarStatus('end', true);
               resolve(results);

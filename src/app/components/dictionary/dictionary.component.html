@@ -8,7 +8,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let word of words | paginate: { itemsPerPage: 2, currentPage: page }">
+        <tr *ngFor="let word of words | paginate: { itemsPerPage: 5, currentPage: page }">
           <td>{{word.world}}</td>
           <td>{{word.definition}}</td>
         </tr>

@@ -17,6 +17,7 @@
 
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
+import { getUniqueValue } from '../../lib/general';
 
 @Component({
   selector: 'app-search',
@@ -31,6 +32,8 @@ export class SearchComponent implements OnInit {
   isInvalid: boolean;
   invalidMessage: string;
   title: string;
+  localSpinner: boolean;
+  currentRequest: any;
 
   @Output() anagramsChange = new EventEmitter();
   @Input() showSearch: boolean;
@@ -43,6 +46,7 @@ export class SearchComponent implements OnInit {
     this.isInvalid = false;
     this.invalidMessage = '';
     this.title = 'Anagrams Factory';
+    this.localSpinner = false;
   }
 
   // Angular onSearchChange
@@ -68,24 +72,22 @@ export class SearchComponent implements OnInit {
     this.word = '';
     this.isInvalid = false;
     this.invalidMessage = '';
-    this.anagramsChange.emit({
-      action: 'reset'
-    });
+    this.localSpinner = false;
+    if (this.currentRequest !== undefined) { this.currentRequest.unsubscribe(); }
+    this.anagramsChange.emit({ action: 'reset' });
   }
 
   // Get anagrams
   getAnagrams() {
-    if (!this.isInvalid) {
-      this.anagramsChange.emit({
-        action: 'spinner',
-        results: true
-      });
-      this.apiservice.getAnagrams(this.word).subscribe({
+    if (!this.isInvalid && this.word !== '') {
+      this.localSpinner = true;
+      this.currentRequest = this.apiservice.getAnagrams(this.word).subscribe({
         next: (data: any) => {
           this.anagramsChange.emit({
             action: 'show-results',
-            results: data.substring(0, data.length - 1).split(',')
+            results: getUniqueValue(data.substring(0, data.length - 1).split(','))
           });
+          this.localSpinner = false;
         },
         error: (error: any) => {
           console.error('Error while retrieving anagrams - ' + error.message);
@@ -93,6 +95,7 @@ export class SearchComponent implements OnInit {
             action: 'show-error',
             results: 'Error: unable to retrieving anagrams. Check the server connection.'
           });
+          this.localSpinner = false;
         }
       });
     }
