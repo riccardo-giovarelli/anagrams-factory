@@ -22,7 +22,7 @@ along with Anagrams Factory.  If not, see <http://www.gnu.org/licenses/>.
 Copyright 2020 Riccardo Giovarelli <riccardo.giovarelli@gmail.com>
 """
 
-from flask import Flask, request, abort
+from flask import Flask, request, abort, Response
 from flask_cors import CORS
 from anagram import getAnagrams
 from dictionary import getTrueWorld
@@ -35,7 +35,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 # ROUTE: anagrams
 @app.route('/anagrams', methods=['GET'])
 def returnAnagrams():
-    return getAnagrams(request.args['text'])
+    return Response(getAnagrams(request.args['text']), mimetype='text/plain')
 
 
 # ROUTE: dictionary

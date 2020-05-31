@@ -34,7 +34,7 @@ export class ApiService {
   getAnagrams(text: string) {
     if (text !== undefined && text !== '') {
       const url = config.baseUrl + config.endpoint.anagrams + '?text=' + text;
-      return this.http.get<any>(url);
+      return this.http.get(url, { responseType: 'text' });
     }
   }
 

@@ -22,21 +22,6 @@ along with Anagrams Factory.  If not, see <http://www.gnu.org/licenses/>.
 Copyright 2020 Riccardo Giovarelli <riccardo.giovarelli@gmail.com>
 """
 
-import json
-
-
-def getAnagrams(text):
-    """Return all possible anagrams for the word provided
-
-    Args:
-      text (string): Thw word for generate anagrams
-
-    Returns:
-      list: All possible anagrams
-    """
-
-    return json.dumps(generateAnagrams(text))
-
 
 def swap(chars, i, j):
     """Swap two chars in a list
@@ -55,27 +40,26 @@ def swap(chars, i, j):
     return ''.join(chars)
 
 
-def generateAnagrams(string):
+def getAnagrams(string):
     """Generate all possible anagrams for the word provided
 
     Args:
       string (string): Thw word for generate anagrams
 
     Returns:
-      list: All possible anagrams
+      stream: All possible anagrams
     """
 
     string = list(string)
     stringLength = len(string)
     chars = string
-    anagrams = []
     counter = []
     i = 0
 
     for x in range(stringLength):
         counter.insert(x, 0)
 
-    anagrams.append(''.join(string).upper())
+    yield ''.join(string).upper() + ','
 
     while i < stringLength:
         if counter[i] < i:
@@ -83,9 +67,7 @@ def generateAnagrams(string):
             chars = swap(chars, start, i)
             counter[i] += 1
             i = 0
-            if ''.join(chars).upper() not in anagrams:
-                anagrams.append(''.join(chars).upper())
+            yield ''.join(chars).upper() + ','
         else:
             counter[i] = 0
             i += 1
-    return anagrams

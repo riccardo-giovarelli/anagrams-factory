@@ -84,7 +84,7 @@ export class SearchComponent implements OnInit {
         next: (data: any) => {
           this.anagramsChange.emit({
             action: 'show-results',
-            results: data
+            results: data.substring(0, data.length - 1).split(',')
           });
         },
         error: (error: any) => {
