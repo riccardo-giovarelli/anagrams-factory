@@ -81,7 +81,11 @@ export class AppComponent implements OnInit {
         this.showProgressbar = false;
         this.showSearch = false;
         this.showContinue = false;
-        if (result.results !== null) { this.words = result.results; }
+        if (result.results !== null) {
+          this.words = result.results;
+        } else {
+          this.words = [];
+        }
         break;
       case 'progressbar':
         this.showProgressbar = true;

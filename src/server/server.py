@@ -25,7 +25,7 @@ Copyright 2020 Riccardo Giovarelli <riccardo.giovarelli@gmail.com>
 from flask import Flask, request, abort, Response
 from flask_cors import CORS
 from anagram import getAnagrams
-from dictionary import getTrueWorld
+from dictionary import getTrueWord
 import json
 
 app = Flask(__name__)
@@ -40,9 +40,9 @@ def returnAnagrams():
 
 # ROUTE: dictionary
 @app.route('/dictionary', methods=['POST'])
-def returnTrueWorld():
+def returnTrueWord():
     if request.json and 'list' in request.json:
-        results = getTrueWorld(request.json['list'])
+        results = getTrueWord(request.json['list'])
         if (len(results) > 0):
             return json.dumps(results), 200
         else:

@@ -40,20 +40,20 @@ def getDictionary(lang):
         return json.load(json_file)
 
 
-def getTrueWorld(worlds):
-    """Return real world in the dictonary from the anagrams
+def getTrueWord(words):
+    """Return real word in the dictonary from the anagrams
 
     Args:
-      worlds (list): Words list to test
+      words (list): Words list to test
 
     Returns:
       list: List of real word
     """
     dictionary = getDictionary('en')
     results = []
-    for world in worlds:
-        if (world.lower() in dictionary):
+    for word in words:
+        if (word.lower() in dictionary):
             results.append(
-                {'world': world, 'definition': dictionary[world.lower()]}
+                {'word': word, 'definition': dictionary[word.lower()]}
             )
     return results
