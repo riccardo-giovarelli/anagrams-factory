@@ -61,6 +61,11 @@
 </ng-template>
 <ng-template [ngIf]="showContinue">
   <div class="results__continue-button">
-    <button type="button" (click)="goToDictionary()" class=" btn btn-primary btn-lg">VIEW RESULTS</button>
+    <button
+      type="button"
+      (click)="goToDictionary()"
+      class=" btn btn-primary btn-lg"
+      [attr.disabled]="promisesLeft > 0 ? true : null"
+    >VIEW RESULTS</button>
   </div>
 </ng-template>
