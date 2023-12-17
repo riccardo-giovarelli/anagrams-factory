@@ -1,22 +1,24 @@
-import pg from 'pg';
 import express from 'express';
 
-const { Client } = pg;
+import anagramRoutes from './routes/anagram';
 
-const client = new Client({
-  user: 'postgres',
-  host: 'db',
-  database: 'postgres',
-  password: '1234',
-  port: 5432,
-});
-
-client.connect();
-
+// Express init
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/api', (req, res) => res.send('Hello World!'));
+// Anagram route
+app.use('/api/anagram', anagramRoutes);
 
-app.listen(3000, () => console.log(`App running on port 3000.`));
+// Bad Request
+app.use((req, res) => {
+  res.status(400).json({
+    id: 400,
+    status: 400,
+    code: 'BAD_REQUEST',
+    title: 'Bad Request',
+  });
+});
+
+// Express go live
+app.listen(3000, () => console.log(`App running on port 3000...`));
