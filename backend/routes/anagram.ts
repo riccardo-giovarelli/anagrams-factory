@@ -1,6 +1,13 @@
+const { getAnagrams } = require('../controller/anagram');
+
 const express = require('express'),
   router = express.Router();
 
-router.get('/', (req, res) => res.send('Anagram Route coming soon'));
+/**
+ * Generate anagrams
+ * @name /make
+ * @param text
+ */
+router.get('/make', getAnagrams);
 
 export default router;
