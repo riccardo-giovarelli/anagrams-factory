@@ -12,9 +12,9 @@ const App = () => {
     },
   ]);
 
-  return (
+  return <div className='app_container'>
     <RouterProvider router={router} />
-  )
+  </div>
 }
 
 export default App
