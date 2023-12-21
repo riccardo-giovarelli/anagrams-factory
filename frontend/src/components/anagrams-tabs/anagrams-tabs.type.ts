@@ -6,8 +6,10 @@ export interface TabsType {
   >;
 }
 
+export type tabsIdType = 'dictionary' | 'anagrams';
+
 export interface AnagramsTabsType {
-  currentTab: string;
-  setCurrentTab: (currentTab: string) => void;
-  className: string;
+  currentTab: tabsIdType;
+  setCurrentTab: (currentTab: tabsIdType) => void;
+  className?: string;
 }
