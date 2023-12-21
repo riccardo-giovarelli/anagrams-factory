@@ -1,11 +1,9 @@
-
-
 import { getClassNames } from '../../utils/style';
 import { getTabs } from './anagrams-tabs.lib';
-import { AnagramsTabsType, TabsType } from './anagrams-tabs.type';
+import { AnagramsTabsType, tabsIdType, TabsType } from './anagrams-tabs.type';
 
 
-const AnagramsTabs = ({ currentTab, setCurrentTab, className }: AnagramsTabsType) => {
+const AnagramsTabs = ({ currentTab, setCurrentTab, className = "" }: AnagramsTabsType) => {
     const tabs: TabsType[] = getTabs()
 
     return (
@@ -18,8 +16,8 @@ const AnagramsTabs = ({ currentTab, setCurrentTab, className }: AnagramsTabsType
                     id="tabs"
                     name="tabs"
                     className="block w-full border p-2 rounded-md border-gray-300 focus:border-af-900 focus:ring-af-900"
-                    value={tabs.find((tab) => tab.id === currentTab)?.name}
-                    onChange={(e) => { setCurrentTab(e.target.value) }}
+                    value={tabs.find((tab) => tab.id === currentTab)?.id}
+                    onChange={(e) => { setCurrentTab(e.target.value as tabsIdType); }}
                 >
                     {tabs.map((tab: TabsType, index: number) => (
                         <option
@@ -39,12 +37,12 @@ const AnagramsTabs = ({ currentTab, setCurrentTab, className }: AnagramsTabsType
                                 key={index}
                                 className={getClassNames(
                                     tab.id === currentTab
-                                        ? 'border-af-900 text-af-600'
+                                        ? 'border-af-900 text-af-900'
                                         : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700',
                                     'group inline-flex items-center border-b-2 py-4 px-1 text-sm font-medium'
                                 )}
                                 aria-current={tab.id === currentTab ? 'page' : undefined}
-                                onClick={() => { setCurrentTab(tab.id) }}
+                                onClick={() => { setCurrentTab(tab.id as tabsIdType) }}
 
                             >
                                 <tab.icon
