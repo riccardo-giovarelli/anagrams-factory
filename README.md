@@ -1,5 +1,5 @@
 # Anagrams Factory
-Anagrams Factory finds all the anagrams of the provided word.
+Generate anagrams and play with them
 
 ## Version
 First version coming soon
