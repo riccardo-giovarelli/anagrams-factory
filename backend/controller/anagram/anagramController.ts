@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 
-import { generateAnagram } from '../utils/anagram.lib';
+import { generateAnagram } from '../../utils/anagram.lib';
+import { MetaType } from './anagramController.type';
 
 /**
  * @function getAnagrams
@@ -10,7 +11,7 @@ import { generateAnagram } from '../utils/anagram.lib';
  * @returns {void}
  */
 export const getAnagrams = (req: Request, res: Response): void => {
-  // Check query
+  // {JSON:API} => Query parameters error
   if (!req?.query?.text) {
     res.status(400).json({
       id: 400,
@@ -25,21 +26,41 @@ export const getAnagrams = (req: Request, res: Response): void => {
   }
 
   // Generate anagrams
-  const results = generateAnagram(req.query.text as string);
+  let results = generateAnagram(req.query.text as string);
+
+  // Total results
+  const total = results.length;
+
+  // Pagination
+  const limit = req?.query?.limit ? Number(req.query.limit) : null;
+  const offset = req?.query?.offset ? Number(req.query.offset) : null;
+  if (limit && offset) {
+    results = results.slice((offset - 1) * limit, (offset - 1) * limit + limit);
+  }
 
   if (!results || !Array.isArray(results) || results.length <= 0) {
-    // No results
+    // {JSON:API} => No results
     res.status(204).json({
       links: {
         self: `${req.protocol}://${req.hostname}${req?.socket?.localPort ? ':' + req.socket.localPort : ''}${req.originalUrl}`,
       },
       data: [],
       meta: {
-        count: 0,
+        total: 0,
       },
     });
   } else {
-    // Results
+    // Meta values
+    const meta: MetaType = {
+      total: total,
+    };
+    if (offset && limit) {
+      meta.offset = offset;
+      meta.limit = limit;
+      meta.pages = limit ? Math.ceil(total / limit) : 1;
+    }
+
+    // {JSON:API} => Results
     res.status(200).json({
       links: {
         self: `${req.protocol}://${req.hostname}${req?.socket?.localPort ? ':' + req.socket.localPort : ''}${req.originalUrl}`,
@@ -51,9 +72,7 @@ export const getAnagrams = (req: Request, res: Response): void => {
           word: result,
         },
       })),
-      meta: {
-        count: results.length,
-      },
+      meta,
     });
   }
 };
