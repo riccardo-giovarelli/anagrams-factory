@@ -1,4 +1,4 @@
-import express from 'express';
+const express = require('express');
 
 import anagramRoutes from './routes/anagram';
 
@@ -21,4 +21,4 @@ app.use((req, res) => {
 });
 
 // Express go live
-app.listen(3000, () => console.log(`App running on port 3000...`));
+module.exports = app.listen(3000, () => console.log(`App running on port 3000...`));
