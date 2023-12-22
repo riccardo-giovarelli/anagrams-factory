@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express';
 
 import anagramRoutes from './routes/anagram';
 
@@ -21,4 +21,6 @@ app.use((req, res) => {
 });
 
 // Express go live
-module.exports = app.listen(3000, () => console.log(`App running on port 3000...`));
+export default app.listen(3000, () => {
+  console.log(`Anagram Factory API listening on port 3000...`);
+});

@@ -4,7 +4,7 @@
  * @param {string} text Text to anagram
  * @returns {string[]} Array of anagrams
  */
-const generateAnagram = (text: string): string[] => {
+export const generateAnagram = (text: string): string[] => {
   const output = [];
   const traverse = (text: string, perm = '') => {
     if (!text) output.push(perm);
@@ -15,5 +15,3 @@ const generateAnagram = (text: string): string[] => {
   traverse(text);
   return output;
 };
-
-module.exports = { generateAnagram };

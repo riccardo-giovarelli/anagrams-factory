@@ -1,4 +1,4 @@
-const { getAnagrams } = require('../controller/anagram');
+import { getAnagrams } from '../controller/anagram/anagramController';
 
 const express = require('express'),
   router = express.Router();
