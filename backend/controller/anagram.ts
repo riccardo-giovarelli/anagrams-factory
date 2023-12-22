@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-const { generateAnagram } = require('../utils/anagram');
+import { generateAnagram } from '../utils/anagram.lib';
 
 /**
  * @function getAnagrams
@@ -9,7 +9,7 @@ const { generateAnagram } = require('../utils/anagram');
  * @param {Response} res Response object
  * @returns {void}
  */
-const getAnagrams = (req: Request, res: Response) => {
+export const getAnagrams = (req: Request, res: Response): void => {
   // Check query
   if (!req?.query?.text) {
     res.status(400).json({
@@ -57,5 +57,3 @@ const getAnagrams = (req: Request, res: Response) => {
     });
   }
 };
-
-module.exports = { getAnagrams };

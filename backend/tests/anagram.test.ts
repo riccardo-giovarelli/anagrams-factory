@@ -1,6 +1,6 @@
 import request from 'supertest';
 
-const app = require('../index');
+import app from '../index';
 
 describe('GET /api/anagram/make?text=Riccardo', () => {
   it('should return all anagrams generated', async () => {
