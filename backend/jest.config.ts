@@ -1,4 +1,6 @@
-module.exports = {
+import type { Config } from 'jest';
+
+const config: Config = {
     preset: 'ts-jest',
     testEnvironment: 'node',
     transform: {
@@ -7,5 +9,8 @@ module.exports = {
     transformIgnorePatterns: ['<rootDir>/node_modules/'],
     testMatch: [
         "<rootDir>/tests/**/*.test.ts"
-    ]
+    ],
+    verbose: true
 };
+
+export default config;
