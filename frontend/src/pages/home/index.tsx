@@ -4,13 +4,10 @@ import AnagramsTabAnagram from '../../components/anagrams-tab-anagram/anagrams-t
 import AnagramsTabs from '../../components/anagrams-tabs/anagrams-tabs';
 import { tabsIdType } from '../../components/anagrams-tabs/anagrams-tabs.type';
 import Header from '../../components/header/header';
-import useAnagram from '../../hooks/useAnagram/useAnagram';
 
 
 const Home = () => {
     const [currentTab, setCurrentTab] = useState<tabsIdType>('anagrams');
-    const [text, setText] = useState<string>("");
-    const anagrams = useAnagram(text, 1, 123)
 
     return <div className="home__container w-full flex flex-col px-4 pt-2 justify-center max-w-5xl m-auto min-w-[500px]">
         <div className='home__header'>
@@ -21,7 +18,7 @@ const Home = () => {
                 <AnagramsTabs currentTab={currentTab} setCurrentTab={setCurrentTab} />
             </div>
             <div className='home__tab-anagram my-16 w-full'>
-                {currentTab === 'anagrams' && <AnagramsTabAnagram text={text} setText={setText} />}
+                {currentTab === 'anagrams' && <AnagramsTabAnagram />}
             </div>
             <div className='home__tab-dictionary my-16 w-full'>
                 {currentTab === 'dictionary' && <></>}
