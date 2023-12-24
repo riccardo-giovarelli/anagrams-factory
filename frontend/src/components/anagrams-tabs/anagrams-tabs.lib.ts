@@ -1,5 +1,6 @@
 import { BookOpenIcon, Squares2X2Icon } from '@heroicons/react/24/outline';
 
+
 /**
  * @function getTabs
  *
