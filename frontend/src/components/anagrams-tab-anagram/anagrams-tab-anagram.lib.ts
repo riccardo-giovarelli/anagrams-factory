@@ -6,7 +6,7 @@
  * @param {limit} limit Query limit
  * @returns {array} Anagrams for text provided
  */
-export const getAnagrams = async (text: string, offset: number, limit: number) => {
+export const getAnagrams = async (text: string, offset: number, limit: number): Promise<string[]> => {
   try {
     const response = await fetch(`http://localhost:3000/api/anagram/make?text=${text}&limit=${limit}&offset=${offset}`);
     const contentType = response.headers.get('content-type');
@@ -22,4 +22,5 @@ export const getAnagrams = async (text: string, offset: number, limit: number) =
     console.warn('[AF-MSG] Error getting anagrams.', e);
     return [];
   }
+  return [];
 };
