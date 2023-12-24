@@ -1,9 +1,12 @@
+import cors from 'cors';
 import express from 'express';
 
 import anagramRoutes from './routes/anagram';
 
+
 // Express init
 const app = express();
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -21,6 +24,11 @@ app.use((req, res) => {
 });
 
 // Express go live
-export default app.listen(3000, () => {
-  console.log(`Anagram Factory API listening on port 3000...`);
-});
+
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(3000, () => {
+    console.log(`Anagram Factory API listening on port 3000...`);
+  });
+}
+
+export default app;

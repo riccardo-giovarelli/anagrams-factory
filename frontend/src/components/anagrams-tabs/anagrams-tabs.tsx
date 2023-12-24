@@ -1,4 +1,4 @@
-import { getClassNames } from '../../utils/style';
+import { mergeClassNames } from '../../utils/style';
 import { getTabs } from './anagrams-tabs.lib';
 import { AnagramsTabsType, tabsIdType, TabsType } from './anagrams-tabs.type';
 
@@ -35,7 +35,7 @@ const AnagramsTabs = ({ currentTab, setCurrentTab, className = "" }: AnagramsTab
                         {tabs.map((tab: TabsType, index: number) => (
                             <button
                                 key={index}
-                                className={getClassNames(
+                                className={mergeClassNames(
                                     tab.id === currentTab
                                         ? 'border-af-900 text-af-900'
                                         : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700',
@@ -46,7 +46,7 @@ const AnagramsTabs = ({ currentTab, setCurrentTab, className = "" }: AnagramsTab
 
                             >
                                 <tab.icon
-                                    className={getClassNames(
+                                    className={mergeClassNames(
                                         tab.id === currentTab ? 'text-af-900' : 'text-gray-400 group-hover:text-gray-500',
                                         '-ml-0.5 mr-2 h-5 w-5'
                                     )}
