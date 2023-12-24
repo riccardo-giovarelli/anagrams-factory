@@ -11,7 +11,11 @@ import { MetaType } from './anagramController.type';
  * @returns {void}
  */
 export const getAnagrams = (req: Request, res: Response): void => {
-  // {JSON:API} => Query parameters error
+  /**
+   * {JSON:API}
+   *
+   * RESPONSE: Query parameters error
+   */
   if (!req?.query?.text) {
     res.status(400).json({
       id: 400,
@@ -25,21 +29,21 @@ export const getAnagrams = (req: Request, res: Response): void => {
     });
   }
 
+  const limit = req?.query?.limit ? Number(req.query.limit) : null;
+  const offset = req?.query?.offset ? Number(req.query.offset) : null;
+
   // Generate anagrams
-  let results = generateAnagram(req.query.text as string);
+  let results = generateAnagram(req.query.text as string, offset, limit);
 
   // Total results
   const total = results.length;
 
-  // Pagination
-  const limit = req?.query?.limit ? Number(req.query.limit) : null;
-  const offset = req?.query?.offset ? Number(req.query.offset) : null;
-  if (limit && offset) {
-    results = results.slice((offset - 1) * limit, (offset - 1) * limit + limit);
-  }
-
   if (!results || !Array.isArray(results) || results.length <= 0) {
-    // {JSON:API} => No results
+    /**
+     * {JSON:API}
+     *
+     * RESPONSE: No results
+     */
     res.status(204).json({
       links: {
         self: `${req.protocol}://${req.hostname}${req?.socket?.localPort ? ':' + req.socket.localPort : ''}${req.originalUrl}`,
@@ -60,7 +64,11 @@ export const getAnagrams = (req: Request, res: Response): void => {
       meta.pages = limit ? Math.ceil(total / limit) : 1;
     }
 
-    // {JSON:API} => Results
+    /**
+     * {JSON:API}
+     *
+     * RESPONSE: Results
+     */
     res.status(200).json({
       links: {
         self: `${req.protocol}://${req.hostname}${req?.socket?.localPort ? ':' + req.socket.localPort : ''}${req.originalUrl}`,
