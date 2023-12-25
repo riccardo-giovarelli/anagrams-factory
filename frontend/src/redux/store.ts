@@ -2,7 +2,6 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import anagramReducer from './reducers/anagram/anagramSlice';
 
-
 const store = configureStore({
   reducer: {
     anagram: anagramReducer,

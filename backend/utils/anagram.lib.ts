@@ -25,7 +25,7 @@ const swap = (chars: string[], i: number, j: number): string[] => {
  */
 export const generateAnagram = (input: string, offset: number, limit: number): string[] => {
   const numOfAnagrams = getFactorial(input.length);
-  const startIndex = offset - 1;
+  const startIndex = offset;
   const endIndex = startIndex + limit > numOfAnagrams - 1 ? numOfAnagrams - 1 : startIndex + limit - 1;
   const counter = new Array(input.length).fill(0);
   const anagrams = [];
@@ -33,8 +33,8 @@ export const generateAnagram = (input: string, offset: number, limit: number): s
   let itarations = 0;
   let anagramsCounter = 0;
 
-  // Wrong offset
-  if (offset > numOfAnagrams) {
+  // Wrong offset and/or limit
+  if (offset * limit > numOfAnagrams) {
     return [];
   }
 

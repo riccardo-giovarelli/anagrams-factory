@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
 import { generateAnagram } from '../../utils/anagram.lib';
-import { MetaType } from './anagramController.type';
+import { getFactorial } from '../../utils/math.lib';
 
 /**
  * @function getAnagrams
@@ -36,7 +36,7 @@ export const getAnagrams = (req: Request, res: Response): void => {
   let results = generateAnagram(req.query.text as string, offset, limit);
 
   // Total results
-  const total = results.length;
+  const total = getFactorial(req.query.text.toString().length);
 
   if (!results || !Array.isArray(results) || results.length <= 0) {
     /**
@@ -54,16 +54,6 @@ export const getAnagrams = (req: Request, res: Response): void => {
       },
     });
   } else {
-    // Meta values
-    const meta: MetaType = {
-      total: total,
-    };
-    if (offset && limit) {
-      meta.offset = offset;
-      meta.limit = limit;
-      meta.pages = limit ? Math.ceil(total / limit) : 1;
-    }
-
     /**
      * {JSON:API}
      *
@@ -80,7 +70,12 @@ export const getAnagrams = (req: Request, res: Response): void => {
           word: result,
         },
       })),
-      meta,
+      meta: {
+        offset,
+        limit,
+        total,
+        pages: limit ? Math.ceil(total / limit) : 1,
+      },
     });
   }
 };
