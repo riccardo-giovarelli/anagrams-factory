@@ -40,10 +40,13 @@ export const getAnagrams = async (text: string, offset: number, limit: number): 
 export const handleInputChange = (
   event: React.ChangeEvent<HTMLInputElement>,
   dispatch: AppDispatch,
-  setText: (text: string) => UnknownAction
+  setText: (text: string) => UnknownAction,
+  setMessage: (message: string) => void
 ): void => {
   dispatch(setText(event.target.value.replace(/[^a-zA-Z]/g, '')));
-  if (event.target.value.length > 10 && /[a-zA-Z]/g.test(event.target.value)) {
-    // TODO: Error message
+  if (event.target.value.length > 10 || /[^a-zA-Z]/g.test(event.target.value)) {
+    setMessage('Insert max 10 alphabetical characters, please.');
+  } else {
+    setMessage('');
   }
 };

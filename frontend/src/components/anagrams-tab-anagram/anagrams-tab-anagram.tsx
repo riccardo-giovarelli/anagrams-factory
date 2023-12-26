@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import { useState } from 'react';
 
 import { ArrowPathIcon } from '@heroicons/react/24/outline';
 
@@ -6,11 +6,13 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { setAnagrams, setLoading, setText } from '../../redux/reducers/anagram/anagramSlice';
 import { mergeClassNames } from '../../utils/style';
 import AnagramsList from '../anagrams-list/anagrams-list';
+import MessageBox from '../message-box/message-box';
 import { getAnagrams, handleInputChange } from './anagrams-tab-anagram.lib';
 
 const AnagramsTabAnagram = () => {
   const dispatch = useAppDispatch();
   const { text, loading, offset, limit } = useAppSelector((state) => state.anagram);
+  const [message, setMessage] = useState<string>('');
 
   /**
    * Button click handler
@@ -24,11 +26,11 @@ const AnagramsTabAnagram = () => {
 
   return (
     <div className='anagramstabanagram__container'>
-      <div className={mergeClassNames(loading ? 'pointer-events-none' : '', 'anagramstabanagram__form-container')}>
+      <div className={mergeClassNames(loading ? 'pointer-events-none' : '', 'anagramstabanagram__form-container flex flex-col gap-y-4')}>
         <div
           className={mergeClassNames(
             loading ? 'pointer-events-none' : '',
-            'anagramstabanagram__input-button-container w-full flex flex-col sm:flex-row flex-nowrap gap-3 mx-auto w-3/4 md:w-2/4'
+            'anagramstabanagram__input-button-container flex flex-col sm:flex-row flex-nowrap gap-3 mx-auto w-full sm:w-3/4 md:w-2/4'
           )}
         >
           <div className='anagramstabanagram__input-container w-full'>
@@ -43,7 +45,7 @@ const AnagramsTabAnagram = () => {
               placeholder='Enter a text...'
               value={text}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                handleInputChange(event, dispatch, setText);
+                handleInputChange(event, dispatch, setText, setMessage);
               }}
               maxLength={10}
             />
@@ -61,6 +63,7 @@ const AnagramsTabAnagram = () => {
             </button>
           </div>
         </div>
+        <div className='mx-auto w-full sm:w-3/4 md:w-2/4'>{message && <MessageBox type='warning' message={message} />}</div>
       </div>
       <div className='anagramstabanagram__anagrams-container mt-10'>
         <AnagramsList />
