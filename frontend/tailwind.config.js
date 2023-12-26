@@ -8,6 +8,7 @@ export default {
     extend: {
       colors: {
         af: {
+          100: '#ff751a',
           600: '#0284c7',
           900: '#0c4a6e',
         },
