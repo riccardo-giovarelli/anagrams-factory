@@ -1,12 +1,10 @@
 import request from 'supertest';
 
-import app from '../../index';
-import { getFactorial } from '../../utils/math.lib';
-import { isJson } from '../../utils/tests.lib';
+import app from '../../../index';
+import { getFactorial } from '../../../utils/math.lib';
+import { isJson } from '../../../utils/tests.lib';
+import { testWord } from '../../utils/constants';
 import { AnagramResposneType } from './anagram.test.type';
-
-const testWord = 'rick';
-const testWordAnagramsCount = getFactorial(testWord.length);
 
 describe(`GET /api/anagram/make?text=${testWord}`, () => {
   it(`should return all the anagrams for the word "${testWord}"`, async () => {
@@ -20,7 +18,7 @@ describe(`GET /api/anagram/make?text=${testWord}`, () => {
         const resultsJson = JSON.parse(res.text);
         expect(resultsJson).toHaveProperty('data');
         expect(typeof resultsJson.data).toBe('object');
-        expect(resultsJson.data.length).toBe(testWordAnagramsCount);
+        expect(resultsJson.data.length).toBe(getFactorial(testWord.length));
       });
   });
 });
