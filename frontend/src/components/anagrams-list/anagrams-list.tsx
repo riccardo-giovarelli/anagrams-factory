@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { setAnagrams, setLoading, setOffset } from '../../redux/reducers/anagram/anagramSlice';
 import { AnagramDataType } from '../../redux/reducers/anagram/anagramSlice.type';
 import { mergeClassNames } from '../../utils/style.ts';
-import AnagramsPagination from '../anagrams-pagination/anagrams-pagination.tsx';
+import AnagramsPagination from '../anagrams-pagination/anagrams-pagination';
 import { getAnagrams } from '../anagrams-tab-anagram/anagrams-tab-anagram.lib';
 
 const AnagramsList = () => {
