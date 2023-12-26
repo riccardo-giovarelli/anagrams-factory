@@ -29,8 +29,8 @@ export const getAnagrams = (req: Request, res: Response): void => {
     });
   }
 
-  const limit = req?.query?.limit ? Number(req.query.limit) : null;
-  const offset = req?.query?.offset ? Number(req.query.offset) : null;
+  const limit = req?.query?.limit ? Number(req.query.limit) : 100;
+  const offset = req?.query?.offset ? Number(req.query.offset) : 1;
 
   // Generate anagrams
   let results = generateAnagram(req.query.text as string, offset, limit);
