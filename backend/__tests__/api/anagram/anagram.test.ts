@@ -23,10 +23,10 @@ describe(`GET /api/anagram/make?text=${testWord}`, () => {
   });
 });
 
-describe(`GET /api/anagram/make?text=${testWord}&offset=1&limit=10`, () => {
+describe(`GET /api/anagram/make?text=${testWord}&offset=0&limit=10`, () => {
   it(`should return the first 10 anagrams for the word "${testWord}"`, async () => {
     return request(app)
-      .get('/api/anagram/make?text=rick&offset=1&limit=10')
+      .get('/api/anagram/make?text=rick&offset=0&limit=10')
       .expect(200)
       .expect('Content-Type', /json/)
       .then((res: AnagramResposneType) => {
