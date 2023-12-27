@@ -39,12 +39,12 @@ export const getAnagrams = (req: Request, res: Response): void => {
    * RESPONSE: Input text length exceeded
    */
   if (req.query.text.length > process.env.INPUT_TEXT_MAX_LENGTH) {
-    res.status(400).json({
+    res.status(422).json({
       id: 422,
       status: 422,
-      code: 'ANAGRAM_UNPROCESSABLE_ENTITY',
-      title: 'Unprocessable Entity',
-      detail: 'Length of input text exceeded',
+      code: 'UNPROCESSABLE_ENTITY',
+      title: 'Invalid input text',
+      detail: `Input text is too long. Max length is ${process.env.INPUT_TEXT_MAX_LENGTH} characters.`,
       links: {
         self: `${req.protocol}://${req.hostname}${req?.socket?.localPort ? ':' + req.socket.localPort : ''}${req.originalUrl}`,
       },
@@ -57,13 +57,13 @@ export const getAnagrams = (req: Request, res: Response): void => {
    * STATUS CODE: 422
    * RESPONSE: Only alphabetical characters
    */
-  if (/[^a-zA-Z]/g.test(req.query.text.toString())) {
-    res.status(400).json({
+  if (new RegExp(process.env.INPUT_VALIDATION_REGEX, 'g').test(req.query.text.toString())) {
+    res.status(422).json({
       id: 422,
       status: 422,
-      code: 'ANAGRAM_UNPROCESSABLE_ENTITY',
-      title: 'Unprocessable Entity',
-      detail: 'Only alphabetical characters allowed',
+      code: 'UNPROCESSABLE_ENTITY',
+      title: 'Invalid input text',
+      detail: 'Only alphabetical characters allowed in the input text.',
       links: {
         self: `${req.protocol}://${req.hostname}${req?.socket?.localPort ? ':' + req.socket.localPort : ''}${req.originalUrl}`,
       },
