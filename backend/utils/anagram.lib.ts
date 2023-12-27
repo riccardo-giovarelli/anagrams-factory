@@ -1,5 +1,6 @@
 import { getFactorial } from './math.lib';
 
+
 /**
  * @function swap
  *
@@ -25,16 +26,16 @@ const swap = (chars: string[], i: number, j: number): string[] => {
  */
 export const generateAnagram = (input: string, offset: number, limit: number): string[] => {
   const numOfAnagrams = getFactorial(input.length);
-  const startIndex = offset;
+  const startIndex = offset * limit;
   const endIndex = startIndex + limit > numOfAnagrams - 1 ? numOfAnagrams - 1 : startIndex + limit - 1;
   const counter = new Array(input.length).fill(0);
   const anagrams = [];
   let chars = input.split('');
-  let itarations = 0;
+  let iterations = 0;
   let anagramsCounter = 0;
 
-  // Wrong offset and/or limit
-  if (offset * limit > numOfAnagrams) {
+  // Wrong offset
+  if (startIndex > numOfAnagrams - 1) {
     return [];
   }
 
@@ -45,18 +46,18 @@ export const generateAnagram = (input: string, offset: number, limit: number): s
   }
 
   // Generate anagrams
-  while (itarations < input.length) {
-    if (counter[itarations] < itarations) {
-      chars = swap(chars, itarations % 2 === 1 ? counter[itarations] : 0, itarations);
-      counter[itarations]++;
-      itarations = 0;
+  while (iterations < input.length) {
+    if (counter[iterations] < iterations) {
+      chars = swap(chars, iterations % 2 === 1 ? counter[iterations] : 0, iterations);
+      counter[iterations]++;
+      iterations = 0;
       if (anagramsCounter >= startIndex && anagramsCounter <= endIndex) {
         anagrams.push(chars.join(''));
       }
       anagramsCounter++;
     } else {
-      counter[itarations] = 0;
-      itarations++;
+      counter[iterations] = 0;
+      iterations++;
     }
   }
 
