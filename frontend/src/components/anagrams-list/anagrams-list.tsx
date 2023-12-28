@@ -9,6 +9,7 @@ import { mergeClassNames } from '../../utils/style.ts';
 import AnagramsPagination from '../anagrams-pagination/anagrams-pagination';
 import { getAnagrams } from '../anagrams-tab-anagram/anagrams-tab-anagram.lib';
 
+
 const AnagramsList = () => {
   const { anagrams, offset, limit, text } = useAppSelector((state) => state.anagram);
   const dispatch = useAppDispatch();
@@ -26,7 +27,7 @@ const AnagramsList = () => {
       })();
   }, [offset]);
 
-  return anagrams ? (
+  return anagrams?.data && Array.isArray(anagrams.data) ? (
     <div className='anagramslist__container'>
       <div className='anagramslist__list-container px-5'>
         <ul className='anagramslist__list flex flex-row flex-wrap text-lg gap-3' role='list'>

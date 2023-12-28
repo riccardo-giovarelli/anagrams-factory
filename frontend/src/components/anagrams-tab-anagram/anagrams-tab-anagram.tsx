@@ -9,6 +9,7 @@ import AnagramsList from '../anagrams-list/anagrams-list';
 import MessageBox from '../message-box/message-box';
 import { getAnagrams, handleInputChange } from './anagrams-tab-anagram.lib';
 
+
 const AnagramsTabAnagram = () => {
   const dispatch = useAppDispatch();
   const { text, loading, offset, limit } = useAppSelector((state) => state.anagram);
@@ -20,7 +21,14 @@ const AnagramsTabAnagram = () => {
   const handleGoButtonClick = async () => {
     dispatch(setLoading(true));
     const anagramsData = await getAnagrams(text, offset, limit);
-    dispatch(setAnagrams(anagramsData));
+    if (!anagramsData) {
+      dispatch(setAnagrams([]));
+    } else if (anagramsData.data) {
+      dispatch(setAnagrams(anagramsData));
+    } else if (anagramsData.title && anagramsData.detail) {
+      setMessage(`${anagramsData.title}: ${anagramsData.detail}`);
+      dispatch(setAnagrams([]));
+    }
     dispatch(setLoading(false));
   };
 
@@ -45,9 +53,8 @@ const AnagramsTabAnagram = () => {
               placeholder='Enter a text...'
               value={text}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                handleInputChange(event, dispatch, setText, setMessage);
+                handleInputChange(event, dispatch, setText, message, setMessage);
               }}
-              maxLength={10}
             />
           </div>
           <div className='anagramstabanagram__button-container'>
