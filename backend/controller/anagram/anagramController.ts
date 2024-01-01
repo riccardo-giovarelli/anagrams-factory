@@ -3,7 +3,7 @@ import 'dotenv/config';
 import { Request, Response } from 'express';
 
 import { generateAnagram } from '../../utils/anagram.lib';
-import { getFactorial } from '../../utils/math.lib';
+import { getFactorial, getNumOfUniqueAnagrams } from '../../utils/math.lib';
 
 
 /**
@@ -74,14 +74,18 @@ export const getAnagrams = (req: Request, res: Response): boolean => {
     return false;
   }
 
+  // Parsing query parameters
   const limit = req?.query?.limit ? Number(req.query.limit) : 100;
   const offset = req?.query?.offset ? Number(req.query.offset) : 0;
+  const unique = req?.query?.unique && req.query.unique === 'true' ? true : false;
 
   // Generate anagrams
   let results = generateAnagram(req.query.text as string, offset, limit);
 
   // Total results
-  const total = getFactorial(req.query.text.toString().length);
+  const total = unique
+    ? getNumOfUniqueAnagrams(req.query.text.toString(), req.query.text.toString().length)
+    : getFactorial(req.query.text.toString().length);
 
   if (!results || !Array.isArray(results) || results.length <= 0) {
     /**
