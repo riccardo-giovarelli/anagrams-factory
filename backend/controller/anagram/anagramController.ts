@@ -5,14 +5,15 @@ import { Request, Response } from 'express';
 import { generateAnagram } from '../../utils/anagram.lib';
 import { getFactorial } from '../../utils/math.lib';
 
+
 /**
  * @function getAnagrams
  *
  * @param {Request} req Request object
  * @param {Response} res Response object
- * @returns {void}
+ * @returns {boolean} true if anagrams are returned, false otherwise
  */
-export const getAnagrams = (req: Request, res: Response): void => {
+export const getAnagrams = (req: Request, res: Response): boolean => {
   /**
    * {JSON:API}
    *
@@ -30,6 +31,7 @@ export const getAnagrams = (req: Request, res: Response): void => {
         self: `${req.protocol}://${req.hostname}${req?.socket?.localPort ? ':' + req.socket.localPort : ''}${req.originalUrl}`,
       },
     });
+    return false;
   }
 
   /**
@@ -49,6 +51,7 @@ export const getAnagrams = (req: Request, res: Response): void => {
         self: `${req.protocol}://${req.hostname}${req?.socket?.localPort ? ':' + req.socket.localPort : ''}${req.originalUrl}`,
       },
     });
+    return false;
   }
 
   /**
@@ -68,6 +71,7 @@ export const getAnagrams = (req: Request, res: Response): void => {
         self: `${req.protocol}://${req.hostname}${req?.socket?.localPort ? ':' + req.socket.localPort : ''}${req.originalUrl}`,
       },
     });
+    return false;
   }
 
   const limit = req?.query?.limit ? Number(req.query.limit) : 100;
@@ -95,6 +99,7 @@ export const getAnagrams = (req: Request, res: Response): void => {
         total: 0,
       },
     });
+    return false;
   } else {
     /**
      * {JSON:API}
@@ -120,5 +125,6 @@ export const getAnagrams = (req: Request, res: Response): void => {
         totalPages: limit ? Math.ceil(total / limit) : 1,
       },
     });
+    return true;
   }
 };
