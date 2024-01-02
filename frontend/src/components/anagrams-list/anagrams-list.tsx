@@ -59,7 +59,7 @@ const AnagramsList = () => {
           setOffset={(v: number) => {
             dispatch(setOffset(v));
           }}
-          total={anagrams ? anagrams.meta.total : 0}
+          total={anagrams ? anagrams.meta.totalResults : 0}
         />
       </div>
     </div>
