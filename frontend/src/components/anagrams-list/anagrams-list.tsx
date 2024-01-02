@@ -9,6 +9,7 @@ import { mergeClassNames } from '../../utils/style.ts';
 import AnagramsPagination from '../anagrams-pagination/anagrams-pagination';
 import { getAnagrams } from '../anagrams-tab-anagram/anagrams-tab-anagram.lib';
 
+
 const AnagramsList = () => {
   const { anagrams, offset, limit, text } = useAppSelector((state) => state.anagram);
   const dispatch = useAppDispatch();
@@ -58,7 +59,7 @@ const AnagramsList = () => {
           setOffset={(v: number) => {
             dispatch(setOffset(v));
           }}
-          total={anagrams ? anagrams.meta.total : 0}
+          total={anagrams ? anagrams.meta.totalResults : 0}
         />
       </div>
     </div>
