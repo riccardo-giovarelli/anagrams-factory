@@ -22,9 +22,10 @@ const swap = (chars: string[], i: number, j: number): string[] => {
  * @param {string} input Text to anagram
  * @param {number} offset Page number in results
  * @param {number} limit Size of page in results
+ * @param {boolean} unique Return only unique values
  * @returns {string[]} Array of anagrams
  */
-export const generateAnagram = (input: string, offset: number, limit: number): string[] => {
+export const generateAnagram = (input: string, offset: number, limit: number, unique: boolean = false): string[] => {
   const numOfAnagrams = getFactorial(input.length);
   const startIndex = offset * limit;
   const endIndex = startIndex + limit > numOfAnagrams - 1 ? numOfAnagrams - 1 : startIndex + limit - 1;
@@ -61,5 +62,5 @@ export const generateAnagram = (input: string, offset: number, limit: number): s
     }
   }
 
-  return anagrams;
+  return unique ? [...new Set(anagrams)] : anagrams;
 };

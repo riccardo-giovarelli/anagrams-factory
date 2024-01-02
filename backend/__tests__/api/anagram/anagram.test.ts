@@ -3,10 +3,13 @@ import 'dotenv/config';
 import request from 'supertest';
 
 import app from '../../../index';
-import { getFactorial } from '../../../utils/math.lib';
+import { getFactorial, getNumOfUniqueAnagrams } from '../../../utils/math.lib';
 import { isJson } from '../../../utils/tests.lib';
-import { getTooLongText, inputInvalidText, inputText } from './anagram.test.lib';
+import {
+    getTooLongText, inputInvalidText, inputText, inputTextWithRepeatedCharacters
+} from './anagram.test.lib';
 import { AnagramResposneType } from './anagram.test.type';
+
 
 /**
  * Test
@@ -69,7 +72,7 @@ describe(`GET /api/anagram/make?text=${getTooLongText()}`, () => {
 describe(`GET /api/anagram/make?text=${inputText}&offset=0&limit=10`, () => {
   it(`should return the first 10 anagrams for the word "${inputText}"`, async () => {
     return request(app)
-      .get('/api/anagram/make?text=rick&offset=0&limit=10')
+      .get(`/api/anagram/make?text=${inputText}&offset=0&limit=10`)
       .expect(200)
       .expect('Content-Type', /json/)
       .then((res: AnagramResposneType) => {
@@ -93,7 +96,7 @@ describe(`GET /api/anagram/make?text=${inputText}&offset=0&limit=10`, () => {
 describe(`GET /api/anagram/make?text=${inputText}`, () => {
   it(`should return all the anagrams for the word "${inputText}"`, async () => {
     return request(app)
-      .get('/api/anagram/make?text=rick')
+      .get(`/api/anagram/make?text=${inputText}`)
       .expect(200)
       .expect('Content-Type', /json/)
       .then((res: AnagramResposneType) => {
@@ -103,6 +106,30 @@ describe(`GET /api/anagram/make?text=${inputText}`, () => {
         expect(resultsJson).toHaveProperty('data');
         expect(typeof resultsJson.data).toBe('object');
         expect(resultsJson.data.length).toBe(getFactorial(inputText.length));
+      });
+  });
+});
+
+/**
+ * Test
+ *
+ * Method: GET
+ *
+ * Test case: Get anagrams for a provided word with repeated characters and the query parameter "unique" set to true to avoid duplicated
+ */
+describe(`GET /api/anagram/make?text=${inputTextWithRepeatedCharacters}&unique=true`, () => {
+  it(`should return all the anagrams for the word "${inputTextWithRepeatedCharacters}" that contains repeated characters`, async () => {
+    return request(app)
+      .get(`/api/anagram/make?text=${inputTextWithRepeatedCharacters}&unique=true`)
+      .expect(200)
+      .expect('Content-Type', /json/)
+      .then((res: AnagramResposneType) => {
+        expect(res.statusCode).toBe(200);
+        expect(isJson(res.text)).toBe(true);
+        const resultsJson = JSON.parse(res.text);
+        expect(resultsJson).toHaveProperty('data');
+        expect(typeof resultsJson.data).toBe('object');
+        expect(resultsJson.data.length).toBe(getNumOfUniqueAnagrams(inputTextWithRepeatedCharacters, inputTextWithRepeatedCharacters.length));
       });
   });
 });
