@@ -34,7 +34,7 @@ const getCountOfMultipleOccurrenceInAString = (text: string): number[] => {
  * @param {string} text Input string to process
  * @param {number} textLength Length of the text provided
  *
- * @returns {numebr} Number of unique anagrams for a provided text
+ * @returns {number} Number of unique anagrams for a provided text
  */
-export const getNumOfUniqueAnagrams = (text: string, textLength: number) =>
+export const getNumOfUniqueAnagrams = (text: string, textLength: number): number =>
   getFactorial(textLength) / getCountOfMultipleOccurrenceInAString(text).reduce((total, num) => total * getFactorial(num), 1);

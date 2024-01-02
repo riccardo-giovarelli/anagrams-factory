@@ -1,7 +1,11 @@
 import 'dotenv/config';
 
+
 // Sample input text (valid)
-export const inputText = 'rick';
+export const inputText = 'Rick';
+
+// Sample imput text (valid) with repeated characters
+export const inputTextWithRepeatedCharacters = 'natan';
 
 // Sample input text (invalid characters)
 export const inputInvalidText = '12_34!56';

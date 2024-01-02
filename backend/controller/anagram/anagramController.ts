@@ -80,7 +80,7 @@ export const getAnagrams = (req: Request, res: Response): boolean => {
   const unique = req?.query?.unique && req.query.unique === 'true' ? true : false;
 
   // Generate anagrams
-  let results = generateAnagram(req.query.text as string, offset, limit);
+  let results = generateAnagram(req.query.text as string, offset, limit, unique);
 
   // Total results
   const total = unique
