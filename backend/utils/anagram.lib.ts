@@ -1,5 +1,4 @@
-import { getFactorial } from './math.lib';
-
+import { getFactorial, getNumOfUniqueAnagrams } from './math.lib';
 
 /**
  * @function swap
@@ -26,9 +25,8 @@ const swap = (chars: string[], i: number, j: number): string[] => {
  * @returns {string[]} Array of anagrams
  */
 export const generateAnagram = (input: string, offset: number, limit: number, unique: boolean = false): string[] => {
-  const numOfAnagrams = getFactorial(input.length);
+  const numOfAnagrams = unique ? getNumOfUniqueAnagrams(input, input.length) : getFactorial(input.length);
   const startIndex = offset * limit;
-  const endIndex = startIndex + limit > numOfAnagrams - 1 ? numOfAnagrams - 1 : startIndex + limit - 1;
   const counter = new Array(input.length).fill(0);
   const anagrams = [];
   let chars = input.split('');
@@ -52,15 +50,23 @@ export const generateAnagram = (input: string, offset: number, limit: number, un
       chars = swap(chars, iterations % 2 === 1 ? counter[iterations] : 0, iterations);
       counter[iterations]++;
       iterations = 0;
-      if (anagramsCounter >= startIndex && anagramsCounter <= endIndex) {
-        anagrams.push(chars.join(''));
+      const currentAnagram = chars.join('');
+      if (!unique && anagramsCounter >= startIndex && anagrams.length < limit) {
+        anagrams.push(currentAnagram);
+        anagramsCounter++;
+      } else if (unique && anagramsCounter >= startIndex && !anagrams.includes(currentAnagram) && anagrams.length < limit) {
+        anagrams.push(currentAnagram);
+        anagramsCounter++;
+      } else if (anagramsCounter < startIndex) {
+        anagramsCounter++;
+      } else if (anagrams.length - 1 === limit) {
+        break;
       }
-      anagramsCounter++;
     } else {
       counter[iterations] = 0;
       iterations++;
     }
   }
 
-  return unique ? [...new Set(anagrams)] : anagrams;
+  return anagrams;
 };
