@@ -2,11 +2,13 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { AnagramsInitialState } from './anagramSlice.type';
 
+
 //Initial state
 const anagramsInitialState: AnagramsInitialState = {
   text: '',
   anagrams: null,
   loading: false,
+  unique: false,
   offset: 0,
   limit: 50,
 };
@@ -33,9 +35,12 @@ export const anagramSlice = createSlice({
     setOffset: (state, action) => {
       state.offset = action.payload;
     },
+    setUnique: (state, action) => {
+      state.unique = action.payload;
+    },
   },
 });
 
-export const { setText, setAnagrams, setLoading, setLimit, setOffset } = anagramSlice.actions;
+export const { setText, setAnagrams, setLoading, setLimit, setOffset, setUnique } = anagramSlice.actions;
 
 export default anagramSlice.reducer;

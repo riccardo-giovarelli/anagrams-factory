@@ -17,7 +17,7 @@ const AnagramsPagination = ({ offset, limit, total, setOffset }: AnagramsPaginat
   };
 
   return (
-    <nav className='flex items-center justify-between border-t border-af-900 bg-white px-4 py-3 sm:px-6' aria-label='Pagination'>
+    <nav className='flex items-center justify-between border-2 rounded-xl border-af-900 bg-white p-3 mx-5' aria-label='Pagination'>
       <div className='hidden sm:block'>
         <p className='text-sm text-af-900'>
           Showing <span className='font-medium'>{offset * limit + 1}</span> to{' '}

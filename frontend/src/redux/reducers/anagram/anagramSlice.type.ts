@@ -2,6 +2,7 @@ export interface AnagramsInitialState {
   text: string;
   anagrams: AnagramType | null;
   loading: boolean;
+  unique: boolean;
   offset: number;
   limit: number;
 }

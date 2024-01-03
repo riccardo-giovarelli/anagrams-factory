@@ -3,26 +3,16 @@ import { useState } from 'react';
 import { ArrowPathIcon } from '@heroicons/react/24/outline';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { setAnagrams, setLoading, setText } from '../../redux/reducers/anagram/anagramSlice';
+import { setAnagrams, setLoading, setOffset, setText, setUnique } from '../../redux/reducers/anagram/anagramSlice';
 import { mergeClassNames } from '../../utils/style';
 import AnagramsList from '../anagrams-list/anagrams-list';
 import MessageBox from '../message-box/message-box';
-import { getAnagrams, handleInputChange } from './anagrams-tab-anagram.lib';
+import { handleDeleteButtonClick, handleGoButtonClick, handleInputChange } from './anagrams-tab-anagram.lib';
 
 const AnagramsTabAnagram = () => {
   const dispatch = useAppDispatch();
-  const { text, loading, offset, limit } = useAppSelector((state) => state.anagram);
+  const { text, loading, offset, limit, unique } = useAppSelector((state) => state.anagram);
   const [message, setMessage] = useState<string>('');
-
-  /**
-   * Button click handler
-   */
-  const handleGoButtonClick = async () => {
-    dispatch(setLoading(true));
-    const anagramsData = await getAnagrams(text, offset, limit);
-    dispatch(setAnagrams(anagramsData));
-    dispatch(setLoading(false));
-  };
 
   return (
     <div className='anagramstabanagram__container'>
@@ -45,27 +35,42 @@ const AnagramsTabAnagram = () => {
               placeholder='Enter a text...'
               value={text}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                handleInputChange(event, dispatch, setText, setMessage);
+                handleInputChange(event, dispatch, setText, message, setMessage);
               }}
-              maxLength={10}
             />
           </div>
-          <div className='anagramstabanagram__button-container'>
+          <div className={mergeClassNames(loading || text === '' ? 'cursor-not-allowed' : '', 'anagramstabanagram__button-container')}>
             <button
               type='button'
               className={mergeClassNames(
-                loading || text === '' ? 'opacity-70 cursor-not-allowed' : 'hover:bg-af-600',
+                loading || text === '' ? 'opacity-70 pointer-events-none' : 'hover:bg-af-600',
                 'w-full sm:w-auto inline-flex items-center justify-center rounded-md bg-af-900 px-4 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-af-600'
               )}
-              onClick={handleGoButtonClick}
+              onClick={() => {
+                handleGoButtonClick(dispatch, setLoading, setAnagrams, setMessage, setOffset, setUnique, text, offset, limit, unique);
+              }}
             >
               {loading ? <ArrowPathIcon className='h-5 w-5 animate-spin' aria-hidden='true' /> : <span>Go!</span>}
+            </button>
+          </div>
+          <div className={mergeClassNames(loading || text === '' ? 'cursor-not-allowed' : '', 'anagramstabanagram__button-container')}>
+            <button
+              type='button'
+              className={mergeClassNames(
+                loading || text === '' ? 'opacity-70 pointer-events-none' : 'hover:bg-af-600',
+                'w-full sm:w-auto inline-flex items-center justify-center rounded-md bg-af-900 px-4 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-af-600'
+              )}
+              onClick={() => {
+                handleDeleteButtonClick(dispatch, setText, setMessage, setOffset, setUnique, setAnagrams);
+              }}
+            >
+              <span>Reset</span>
             </button>
           </div>
         </div>
         <div className='mx-auto w-full sm:w-3/4 md:w-2/4'>{message && <MessageBox type='warning' message={message} />}</div>
       </div>
-      <div className='anagramstabanagram__anagrams-container mt-10'>
+      <div className='anagramstabanagram__anagrams-container mt-4'>
         <AnagramsList />
       </div>
     </div>
