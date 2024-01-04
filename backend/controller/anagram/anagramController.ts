@@ -77,14 +77,13 @@ export const getAnagrams = (req: Request, res: Response): boolean => {
   const limit = req?.query?.limit ? Number(req.query.limit) : 100;
   const offset = req?.query?.offset ? Number(req.query.offset) : 0;
   const unique = req?.query?.unique && req.query.unique === 'true' ? true : false;
+  const text = req.query.text.toString().toLowerCase();
 
   // Generate anagrams
-  let results = generateAnagram(req.query.text as string, offset, limit, unique);
+  let results = generateAnagram(text as string, offset, limit, unique);
 
   // Total results
-  const total = unique
-    ? getNumOfUniqueAnagrams(req.query.text.toString(), req.query.text.toString().length)
-    : getFactorial(req.query.text.toString().length);
+  const total = unique ? getNumOfUniqueAnagrams(text, text.length) : getFactorial(text.length);
 
   if (!results || !Array.isArray(results) || results.length <= 0) {
     /**
