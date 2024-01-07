@@ -3,8 +3,8 @@ import 'dotenv/config';
 import request from 'supertest';
 
 import app from '../../../index';
-import { getFactorial, getNumOfUniqueAnagrams } from '../../../utils/math.lib';
-import { isJson } from '../../../utils/tests.lib';
+import { getFactorial, getNumOfUniqueAnagrams } from '../../../utils/lib/math.lib';
+import { isJson } from '../../../utils/lib/tests.lib';
 import {
     getTooLongText, inputInvalidText, inputText, inputTextWithRepeatedCharacters
 } from './anagram.test.lib';
