@@ -1,10 +1,11 @@
-export interface AnagramsInitialState {
+export interface AnagramsStateType {
   text: string;
   anagrams: AnagramType | null;
-  loading: boolean;
   unique: boolean;
   offset: number;
   limit: number;
+  status: string;
+  error: string | undefined;
 }
 
 export interface AnagramType {
@@ -19,4 +20,11 @@ export interface AnagramDataType {
   attributes: {
     word: string;
   };
+}
+
+export interface fetchAnagramsType {
+  text: string;
+  limit: number;
+  offset: number;
+  unique: boolean;
 }

@@ -5,6 +5,7 @@ import AnagramsTabs from '../../components/anagrams-tabs/anagrams-tabs';
 import { tabsIdType } from '../../components/anagrams-tabs/anagrams-tabs.type';
 import Header from '../../components/header/header';
 
+
 const Home = () => {
   const [currentTab, setCurrentTab] = useState<tabsIdType>('anagrams');
 
@@ -13,7 +14,7 @@ const Home = () => {
       <div className='home__header'>
         <Header />
       </div>
-      <div className='home__body bg-white mt-28 flex flex-col p-4 border-2 rounded-xl'>
+      <div className='home__body bg-white mt-4 flex flex-col p-4 border-2 rounded-xl'>
         <div className='home__tabs-header'>
           <AnagramsTabs currentTab={currentTab} setCurrentTab={setCurrentTab} />
         </div>

@@ -1,31 +1,17 @@
 import './anagrams-list.style.scss';
 
-import { useEffect } from 'react';
-
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { setAnagrams, setLoading, setOffset, setUnique } from '../../redux/reducers/anagram/anagramSlice';
+import { setOffset, setUnique } from '../../redux/reducers/anagram/anagramSlice';
 import { AnagramDataType } from '../../redux/reducers/anagram/anagramSlice.type';
+import { fetchAnagrams } from '../../redux/reducers/anagram/anagramThunk.ts';
 import { mergeClassNames } from '../../utils/style.ts';
 import AnagramsPagination from '../anagrams-pagination/anagrams-pagination';
-import { getAnagrams } from '../anagrams-tab-anagram/anagrams-tab-anagram.lib';
 import Toggle from '../toggle/toggle.tsx';
 
-const AnagramsList = () => {
-  const { anagrams, offset, limit, text, unique } = useAppSelector((state) => state.anagram);
-  const dispatch = useAppDispatch();
 
-  /**
-   * Offset changes handler
-   */
-  useEffect(() => {
-    text &&
-      (async () => {
-        dispatch(setLoading(true));
-        const anagramsData = await getAnagrams(text, offset, limit, unique);
-        dispatch(setAnagrams(anagramsData));
-        dispatch(setLoading(false));
-      })();
-  }, [offset, unique]);
+const AnagramsList = () => {
+  const { anagrams, offset, limit, unique } = useAppSelector((state) => state.anagram);
+  const dispatch = useAppDispatch();
 
   return anagrams?.data && Array.isArray(anagrams.data) ? (
     <div className='anagramslist__container'>
@@ -35,6 +21,7 @@ const AnagramsList = () => {
           enabled={unique}
           setEnabled={(value: boolean) => {
             dispatch(setUnique(value));
+            dispatch(fetchAnagrams());
           }}
         />
       </div>
@@ -65,8 +52,9 @@ const AnagramsList = () => {
         <AnagramsPagination
           offset={offset}
           limit={limit}
-          setOffset={(v: number) => {
-            dispatch(setOffset(v));
+          setOffset={(value: number) => {
+            dispatch(setOffset(value));
+            dispatch(fetchAnagrams());
           }}
           total={anagrams ? anagrams.meta.totalResults : 0}
         />

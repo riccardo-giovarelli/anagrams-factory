@@ -1,16 +1,22 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { AnagramsInitialState } from './anagramSlice.type';
+import {
+    caseAnagramsFulfilled, caseAnagramsPending, caseAnagramsRejected, reducerRestore,
+    reducerSetOffset, reducerSetUnique, reduceSetAnagrams, reduceSetLimit, reduceSetText
+} from './anagramReducers';
+import { AnagramsStateType } from './anagramSlice.type';
+import { fetchAnagrams } from './anagramThunk';
 
 
 //Initial state
-const anagramsInitialState: AnagramsInitialState = {
+const anagramsInitialState: AnagramsStateType = {
   text: '',
   anagrams: null,
-  loading: false,
   unique: false,
   offset: 0,
   limit: 50,
+  status: 'idle',
+  error: '',
 };
 
 /**
@@ -20,27 +26,21 @@ export const anagramSlice = createSlice({
   name: 'anagram',
   initialState: anagramsInitialState,
   reducers: {
-    setText: (state, action) => {
-      state.text = action.payload;
-    },
-    setAnagrams: (state, action) => {
-      state.anagrams = action.payload;
-    },
-    setLoading: (state, action) => {
-      state.loading = action.payload;
-    },
-    setLimit: (state, action) => {
-      state.limit = action.payload;
-    },
-    setOffset: (state, action) => {
-      state.offset = action.payload;
-    },
-    setUnique: (state, action) => {
-      state.unique = action.payload;
-    },
+    setText: reduceSetText,
+    setAnagrams: reduceSetAnagrams,
+    setLimit: reduceSetLimit,
+    setOffset: reducerSetOffset,
+    setUnique: reducerSetUnique,
+    restore: reducerRestore,
+  },
+  extraReducers(builder) {
+    builder
+      .addCase(fetchAnagrams.pending, caseAnagramsPending)
+      .addCase(fetchAnagrams.fulfilled, caseAnagramsFulfilled)
+      .addCase(fetchAnagrams.rejected, caseAnagramsRejected);
   },
 });
 
-export const { setText, setAnagrams, setLoading, setLimit, setOffset, setUnique } = anagramSlice.actions;
+export const { setText, setAnagrams, setLimit, setOffset, setUnique, restore } = anagramSlice.actions;
 
 export default anagramSlice.reducer;

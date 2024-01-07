@@ -22,5 +22,5 @@ Riccardo Giovarelli
 - [![GitHub](https://i.stack.imgur.com/tskMh.png) GitHub](https://github.com/riccardo-giovarelli)
 
 ## License
-[GPLv3](https://www.gnu.org/licenses/gpl-3.0.html#license-text)
+[MIT License](https://opensource.org/license/mit/)
 
