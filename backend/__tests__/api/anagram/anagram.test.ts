@@ -5,11 +5,8 @@ import request from 'supertest';
 import app from '../../../index';
 import { getFactorial, getNumOfUniqueAnagrams } from '../../../utils/lib/math.lib';
 import { isJson } from '../../../utils/lib/tests.lib';
-import {
-    getTooLongText, inputInvalidText, inputText, inputTextWithRepeatedCharacters
-} from './anagram.test.lib';
+import { getTooLongText, inputInvalidText, inputText, inputTextWithRepeatedCharacters } from './anagram.test.lib';
 import { AnagramResposneType } from './anagram.test.type';
-
 
 /**
  * Test
@@ -18,7 +15,7 @@ import { AnagramResposneType } from './anagram.test.type';
  *
  * Test case: Get anagrams for a provided word with invalid characters
  */
-describe(`GET /api/anagram/make?text=${inputInvalidText}`, () => {
+describe(`[API-ANAGRAM] GET /api/anagram/make?text=${inputInvalidText}`, () => {
   it(`should return the status code 422 for the text "${inputInvalidText}" because has invalid characters`, async () => {
     return request(app)
       .get(`/api/anagram/make?text=${inputInvalidText}`)
@@ -43,7 +40,7 @@ describe(`GET /api/anagram/make?text=${inputInvalidText}`, () => {
  * Test case: Get anagrams for a provided word with length greater
  * than the maximum admitted
  */
-describe(`GET /api/anagram/make?text=${getTooLongText()}`, () => {
+describe(`[API-ANAGRAM] GET /api/anagram/make?text=${getTooLongText()}`, () => {
   it(`should return the status code 422 for the text "${getTooLongText()}" because exceeds the ${
     process.env.INPUT_TEXT_MAX_LENGTH
   } characters`, async () => {
@@ -69,7 +66,7 @@ describe(`GET /api/anagram/make?text=${getTooLongText()}`, () => {
  *
  * Test case: Get anagrams for a provided word with limit and offset on the results
  */
-describe(`GET /api/anagram/make?text=${inputText}&offset=0&limit=10`, () => {
+describe(`[API-ANAGRAM] GET /api/anagram/make?text=${inputText}&offset=0&limit=10`, () => {
   it(`should return the first 10 anagrams for the word "${inputText}"`, async () => {
     return request(app)
       .get(`/api/anagram/make?text=${inputText}&offset=0&limit=10`)
@@ -93,7 +90,7 @@ describe(`GET /api/anagram/make?text=${inputText}&offset=0&limit=10`, () => {
  *
  * Test case: Get anagrams for a provided word
  */
-describe(`GET /api/anagram/make?text=${inputText}`, () => {
+describe(`[API-ANAGRAM] GET /api/anagram/make?text=${inputText}`, () => {
   it(`should return all the anagrams for the word "${inputText}"`, async () => {
     return request(app)
       .get(`/api/anagram/make?text=${inputText}`)
@@ -117,7 +114,7 @@ describe(`GET /api/anagram/make?text=${inputText}`, () => {
  *
  * Test case: Get anagrams for a provided word with repeated characters and the query parameter "unique" set to true to avoid duplicated
  */
-describe(`GET /api/anagram/make?text=${inputTextWithRepeatedCharacters}&unique=true`, () => {
+describe(`[API-ANAGRAM] GET /api/anagram/make?text=${inputTextWithRepeatedCharacters}&unique=true`, () => {
   it(`should return all the anagrams for the word "${inputTextWithRepeatedCharacters}" that contains repeated characters`, async () => {
     return request(app)
       .get(`/api/anagram/make?text=${inputTextWithRepeatedCharacters}&unique=true`)
