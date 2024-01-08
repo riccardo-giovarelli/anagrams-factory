@@ -5,6 +5,7 @@ const express = require('express'),
 
 /**
  * Generate anagrams
+ *
  * @name /make
  * @param text
  */

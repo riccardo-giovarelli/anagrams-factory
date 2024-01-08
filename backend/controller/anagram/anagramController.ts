@@ -5,7 +5,6 @@ import { Request, Response } from 'express';
 import { generateAnagram } from '../../utils/lib/anagram.lib';
 import { getFactorial, getNumOfUniqueAnagrams } from '../../utils/lib/math.lib';
 
-
 /**
  * @function getAnagrams
  *
