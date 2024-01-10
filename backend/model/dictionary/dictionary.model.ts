@@ -11,9 +11,15 @@ class Dictionary {
   languageCode: string;
   cache: NodeCache;
 
-  constructor(code: string) {
+  /**
+   * Class constructor
+   *
+   * @param {string}code Language code
+   * @param {NodeCache} serverCache Cache instance of server
+   */
+  constructor(code: string, serverCache: NodeCache) {
     this.languageCode = code;
-    this.cache = new NodeCache();
+    this.cache = serverCache;
   }
 
   /**
@@ -30,7 +36,7 @@ class Dictionary {
           .split(EOL)
           .filter(Boolean)
           .map((word: string) => simplifyString(word));
-        this.cache.set(`dictionary_${this.languageCode}_words`, data, 100000000);
+        this.cache.set(`dictionary_${this.languageCode}_words`, data, 3600);
         return data;
       } catch (err) {
         console.error('[AF Error]', err);

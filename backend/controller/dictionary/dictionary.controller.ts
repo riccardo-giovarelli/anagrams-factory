@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 
+import { serverCache } from '../../index';
 import Dictionary from '../../model/dictionary/dictionary.model';
 import { simplifyString } from '../../utils/lib/string.lib';
 import { isValidLanguage } from './dictionary.controller.lib';
@@ -73,7 +74,7 @@ export const searchWord = (req: Request, res: Response): boolean => {
   }
 
   // New Dictionary instance
-  const dictionary = new Dictionary(req.query.lang.toString());
+  const dictionary = new Dictionary(req.query.lang.toString(), serverCache);
 
   if (!dictionary.words.includes(simplifyString(req.query.word.toString()))) {
     /**

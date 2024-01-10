@@ -1,5 +1,6 @@
 import cors from 'cors';
 import express from 'express';
+import NodeCache from 'node-cache';
 
 import anagramRoutes from './routes/anagram';
 import dictionaryRoutes from './routes/dictionary';
@@ -31,5 +32,8 @@ if (process.env.NODE_ENV !== 'test') {
     console.log(`Anagram Factory API listening on port 3000...`);
   });
 }
+
+// Server cache init
+export const serverCache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
 
 export default app;

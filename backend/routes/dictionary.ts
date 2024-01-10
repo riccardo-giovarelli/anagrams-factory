@@ -7,7 +7,8 @@ const express = require('express'),
  * Search a word in dictionary
  *
  * @name /search
- * @param word
+ * @param {string} word Word to search in the dictionary
+ * @param {string} lang Language code
  */
 router.get('/search', searchWord);
 
