@@ -106,6 +106,7 @@ export const getAnagrams = (req: Request, res: Response): boolean => {
     /**
      * {JSON:API}
      *
+     * STATUS CODE: 200
      * RESPONSE: Results
      */
     res.status(200).json({

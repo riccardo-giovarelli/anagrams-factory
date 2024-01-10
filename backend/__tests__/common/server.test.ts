@@ -3,7 +3,7 @@ import 'dotenv/config';
 import request from 'supertest';
 
 import app from '../../index';
-import { isJson } from '../../utils/lib/tests.lib';
+import { isJson } from '../../utils/lib/test.lib';
 import { ServerResposneType } from './server.test.type';
 
 /**

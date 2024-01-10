@@ -4,7 +4,7 @@ import request from 'supertest';
 
 import app from '../../../index';
 import { getFactorial, getNumOfUniqueAnagrams } from '../../../utils/lib/math.lib';
-import { isJson } from '../../../utils/lib/tests.lib';
+import { isJson } from '../../../utils/lib/test.lib';
 import { getTooLongText, inputInvalidText, inputText, inputTextWithRepeatedCharacters } from './anagram.test.lib';
 import { AnagramResposneType } from './anagram.test.type';
 

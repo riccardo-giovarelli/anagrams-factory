@@ -1,4 +1,4 @@
-import { searchWord } from '../controller/dictionary/dictionaryController';
+import { searchWord } from '../controller/dictionary/dictionary.controller';
 
 const express = require('express'),
   router = express.Router();
