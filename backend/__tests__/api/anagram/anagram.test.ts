@@ -13,6 +13,54 @@ import { AnagramResposneType } from './anagram.test.type';
  *
  * Method: GET
  *
+ * Test case: Get anagrams without providing any query parameters
+ */
+describe(`[API-ANAGRAM] GET /api/anagram/make`, () => {
+  it(`should return the status code 400 because query parameters are missing`, async () => {
+    return request(app)
+      .get(`/api/anagram/make`)
+      .expect(400)
+      .expect('Content-Type', /json/)
+      .then((res: AnagramResposneType) => {
+        expect(res.statusCode).toBe(400);
+        expect(isJson(res.text)).toBe(true);
+        const resultsJson = JSON.parse(res.text);
+        expect(resultsJson).toHaveProperty('status');
+        expect(typeof resultsJson.status).toBe('number');
+        expect(resultsJson.status).toBe(400);
+      });
+  });
+});
+
+/**
+ * Test
+ *
+ * Method: GET
+ *
+ * Test case: Get anagrams providing an empty text
+ */
+describe(`[API-ANAGRAM] GET /api/anagram/make?text=`, () => {
+  it(`should return the status code 400 providing an empty text`, async () => {
+    return request(app)
+      .get(`/api/anagram/make?text=`)
+      .expect(400)
+      .expect('Content-Type', /json/)
+      .then((res: AnagramResposneType) => {
+        expect(res.statusCode).toBe(400);
+        expect(isJson(res.text)).toBe(true);
+        const resultsJson = JSON.parse(res.text);
+        expect(resultsJson).toHaveProperty('status');
+        expect(typeof resultsJson.status).toBe('number');
+        expect(resultsJson.status).toBe(400);
+      });
+  });
+});
+
+/**
+ * Test
+ *
+ * Method: GET
+ *
  * Test case: Get anagrams for a provided word with invalid characters
  */
 describe(`[API-ANAGRAM] GET /api/anagram/make?text=${inputInvalidText}`, () => {
@@ -37,12 +85,11 @@ describe(`[API-ANAGRAM] GET /api/anagram/make?text=${inputInvalidText}`, () => {
  *
  * Method: GET
  *
- * Test case: Get anagrams for a provided word with length greater
- * than the maximum admitted
+ * Test case: Get anagrams for a provided word with length greater than the maximum admitted
  */
 describe(`[API-ANAGRAM] GET /api/anagram/make?text=${getTooLongText()}`, () => {
   it(`should return the status code 422 for the text "${getTooLongText()}" because exceeds the ${
-    process.env.INPUT_TEXT_MAX_LENGTH
+    process.env.ANAGRAM_INPUT_TEXT_MAX_LENGTH
   } characters`, async () => {
     return request(app)
       .get(`/api/anagram/make?text=${getTooLongText()}`)

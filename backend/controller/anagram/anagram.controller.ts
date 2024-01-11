@@ -39,13 +39,13 @@ export const getAnagrams = (req: Request, res: Response): boolean => {
    * STATUS CODE: 422
    * RESPONSE: Input text length exceeded
    */
-  if (req.query.text.length > process.env.INPUT_TEXT_MAX_LENGTH) {
+  if (req.query.text.length > process.env.ANAGRAM_INPUT_TEXT_MAX_LENGTH) {
     res.status(422).json({
       id: 422,
       status: 422,
       code: 'UNPROCESSABLE_ENTITY',
       title: 'Invalid input text',
-      detail: `Input text is too long. Max length is ${process.env.INPUT_TEXT_MAX_LENGTH} characters.`,
+      detail: `Input text is too long. Max length is ${process.env.ANAGRAM_INPUT_TEXT_MAX_LENGTH} characters.`,
       links: {
         self: `${req.protocol}://${req.hostname}${req?.socket?.localPort ? ':' + req.socket.localPort : ''}${req.originalUrl}`,
       },
@@ -59,7 +59,7 @@ export const getAnagrams = (req: Request, res: Response): boolean => {
    * STATUS CODE: 422
    * RESPONSE: Only alphabetical characters
    */
-  if (new RegExp(process.env.INPUT_VALIDATION_REGEX, 'g').test(req.query.text.toString())) {
+  if (new RegExp(process.env.ANAGRAM_INPUT_VALIDATION_REGEX, 'g').test(req.query.text.toString())) {
     res.status(422).json({
       id: 422,
       status: 422,
@@ -89,10 +89,10 @@ export const getAnagrams = (req: Request, res: Response): boolean => {
     /**
      * {JSON:API}
      *
-     * STATUS CODE: 204
+     * STATUS CODE: 200
      * RESPONSE: No results
      */
-    res.status(204).json({
+    res.status(200).json({
       links: {
         self: `${req.protocol}://${req.hostname}${req?.socket?.localPort ? ':' + req.socket.localPort : ''}${req.originalUrl}`,
       },
