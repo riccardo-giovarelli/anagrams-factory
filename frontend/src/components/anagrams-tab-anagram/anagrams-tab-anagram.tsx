@@ -45,7 +45,7 @@ const AnagramsTabAnagram = () => {
             <button
               type='button'
               className={mergeClassNames(
-                status === 'loading' || text === '' ? 'opacity-70 pointer-events-none' : 'hover:bg-af-600',
+                status === 'loading' || text === '' ? 'opacity-50 pointer-events-none' : 'hover:bg-af-600',
                 'w-full sm:w-auto inline-flex items-center justify-center rounded-md bg-af-900 px-4 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-af-600'
               )}
               onClick={() => {
@@ -59,7 +59,7 @@ const AnagramsTabAnagram = () => {
             <button
               type='button'
               className={mergeClassNames(
-                status === 'loading' || text === '' ? 'opacity-70 pointer-events-none' : 'hover:bg-af-600',
+                status === 'loading' || text === '' ? 'opacity-50 pointer-events-none' : 'hover:bg-af-600',
                 'w-full sm:w-auto inline-flex items-center justify-center rounded-md bg-af-900 px-4 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-af-600'
               )}
               onClick={() => {

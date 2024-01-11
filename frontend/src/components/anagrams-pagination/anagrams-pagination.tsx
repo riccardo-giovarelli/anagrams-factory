@@ -1,6 +1,7 @@
 import { mergeClassNames } from '../../utils/style';
 import { AnagramsPaginationType } from './anagrams-pagination.type';
 
+
 const AnagramsPagination = ({ offset, limit, total, setOffset }: AnagramsPaginationType) => {
   // Previous click
   const handlePreviousClick = () => {
@@ -28,7 +29,7 @@ const AnagramsPagination = ({ offset, limit, total, setOffset }: AnagramsPaginat
       <div className='flex flex-1 justify-between sm:justify-end gap-3'>
         <button
           className={mergeClassNames(
-            offset - 1 >= 0 ? 'hover:bg-af-600' : 'opacity-70 cursor-not-allowed',
+            offset - 1 >= 0 ? 'hover:bg-af-600' : 'opacity-50 cursor-not-allowed',
             'relative inline-flex items-center rounded-md px-3 py-2 text-sm font-semibold bg-af-900 text-white focus-visible:outline-offset-0'
           )}
           onClick={handlePreviousClick}
@@ -37,7 +38,7 @@ const AnagramsPagination = ({ offset, limit, total, setOffset }: AnagramsPaginat
         </button>
         <button
           className={mergeClassNames(
-            limit * (offset + 1) <= total ? 'hover:bg-af-600' : 'opacity-40 cursor-not-allowed',
+            limit * (offset + 1) <= total ? 'hover:bg-af-600' : 'opacity-50 cursor-not-allowed',
             'relative inline-flex items-center rounded-md px-3 py-2 text-sm font-semibold bg-af-900 text-white focus-visible:outline-offset-0'
           )}
           onClick={handleNextClick}
