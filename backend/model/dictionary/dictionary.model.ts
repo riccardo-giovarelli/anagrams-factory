@@ -28,7 +28,7 @@ class Dictionary {
    * @return {string[]} Words
    */
   get words(): string[] {
-    const words = this.cache.get(`dictionary_${this.languageCode}_words`);
+    const words: undefined | string[] = this.cache.get(`dictionary_${this.languageCode}_words`);
     if (words === undefined) {
       try {
         const output = fs.readFileSync(`${__dirname}/../../data/dictionaries/${this.languageCode.toUpperCase()}.txt`, 'utf8');
@@ -42,7 +42,7 @@ class Dictionary {
         console.error('[AF Error]', err);
       }
     } else {
-      return [];
+      return words;
     }
   }
 }
