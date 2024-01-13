@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
 import AnagramsTabAnagram from '../../components/anagrams-tab-anagram/anagrams-tab-anagram';
+import AnagramsTabDictionary from '../../components/anagrams-tab-dictionary/anagrams-tab-dictionary';
 import AnagramsTabs from '../../components/anagrams-tabs/anagrams-tabs';
 import { tabsIdType } from '../../components/anagrams-tabs/anagrams-tabs.type';
 import Header from '../../components/header/header';
-
 
 const Home = () => {
   const [currentTab, setCurrentTab] = useState<tabsIdType>('anagrams');
@@ -23,7 +23,11 @@ const Home = () => {
             <AnagramsTabAnagram />
           </div>
         )}
-        {currentTab === 'dictionary' && <div className='home__tab-dictionary my-16 w-full'>Coming soon...</div>}
+        {currentTab === 'dictionary' && (
+          <div className='home__tab-dictionary my-16 w-full'>
+            <AnagramsTabDictionary />
+          </div>
+        )}
       </div>
     </div>
   );
