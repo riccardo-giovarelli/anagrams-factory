@@ -1,9 +1,14 @@
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { setCurrentTab } from '../../redux/reducers/tabs/tabsSlice';
+import { tabsIdType } from '../../redux/reducers/tabs/tabsSlice.type';
 import { mergeClassNames } from '../../utils/style';
 import { getTabs } from './anagrams-tabs.lib';
-import { AnagramsTabsType, tabsIdType, TabsType } from './anagrams-tabs.type';
+import { AnagramsTabsType, TabsType } from './anagrams-tabs.type';
 
 
-const AnagramsTabs = ({ currentTab, setCurrentTab, className = '' }: AnagramsTabsType) => {
+const AnagramsTabs = ({ className = '' }: AnagramsTabsType) => {
+  const dispatch = useAppDispatch();
+  const { currentTab } = useAppSelector((state) => state.tab);
   const tabs: TabsType[] = getTabs();
 
   return (
@@ -18,7 +23,7 @@ const AnagramsTabs = ({ currentTab, setCurrentTab, className = '' }: AnagramsTab
           className='block w-full border p-2 rounded-md border-gray-300 focus:border-af-900 focus:ring-af-900'
           value={tabs.find((tab) => tab.id === currentTab)?.id}
           onChange={(e) => {
-            setCurrentTab(e.target.value as tabsIdType);
+            dispatch(setCurrentTab(e.target.value as tabsIdType));
           }}
         >
           {tabs.map((tab: TabsType, index: number) => (
@@ -40,7 +45,7 @@ const AnagramsTabs = ({ currentTab, setCurrentTab, className = '' }: AnagramsTab
                 )}
                 aria-current={tab.id === currentTab ? 'page' : undefined}
                 onClick={() => {
-                  setCurrentTab(tab.id as tabsIdType);
+                  dispatch(setCurrentTab(tab.id as tabsIdType));
                 }}
               >
                 <tab.icon
