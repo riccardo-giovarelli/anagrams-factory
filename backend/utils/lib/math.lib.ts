@@ -11,17 +11,13 @@ export const getFactorial = (x: number): number => {
 /**
  * @function getCountOfMultipleOccurrenceInAString
  *
- * @param {string} text Input string to process
- * @returns {number[]} Count of multiple occurrence for the provided string
+ * @param {string} text Input string to parse
+ * @returns {number[]} Count of multiple occurrences for the provided string
  */
 const getCountOfMultipleOccurrenceInAString = (text: string): number[] => {
   const count = {};
   text.split('').forEach((char: string) => {
-    if (!count[char]) {
-      count[char] = 1;
-    } else {
-      count[char]++;
-    }
+    count[char] = !count[char] ? 1 : count[char] + 1;
   });
   return Object.keys(count)
     .map((char: string) => (count[char] > 1 ? count[char] : null))
