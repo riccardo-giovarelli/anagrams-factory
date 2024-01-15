@@ -1,8 +1,5 @@
 # Anagrams Factory
-Anagrams Factory generates anagrams and does stuff with them.
-
-## Version
-Work in progress, first version coming soon...
+Anagrams Factory generates anagrams and shows it paginated (optionally, excludes the duplicated ones)
 
 ## Prerequisites
 - Node.js
