@@ -3,7 +3,7 @@ import express from 'express';
 import NodeCache from 'node-cache';
 
 import anagramRoutes from './routes/anagram';
-import dictionaryRoutes from './routes/dictionary';
+
 
 // Express init
 const app = express();
@@ -13,8 +13,6 @@ app.use(express.urlencoded({ extended: true }));
 
 // Anagram route
 app.use('/api/anagram', anagramRoutes);
-// Dictionary route
-app.use('/api/dictionary', dictionaryRoutes);
 
 // Bad Request
 app.use((req, res) => {

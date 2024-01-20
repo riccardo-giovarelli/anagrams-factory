@@ -1,8 +1,5 @@
 # Anagrams Factory
-Anagrams Factory generates anagrams and does stuff with them.
-
-## Version
-Work in progress, first version coming soon...
+Anagrams Factory generates anagrams and shows it paginated (optionally, excludes the duplicated ones)
 
 ## Prerequisites
 - Node.js
@@ -17,9 +14,7 @@ Work in progress, first version coming soon...
 Riccardo Giovarelli
 
 ## Contacts
-- [![Profilo](https://i.stack.imgur.com/gVE0j.png) LinkedIn](https://www.linkedin.com/in/riccardo-giovarelli/)
-
-- [![GitHub](https://i.stack.imgur.com/tskMh.png) GitHub](https://github.com/riccardo-giovarelli)
+[![LinkedIn](https://img.shields.io/badge/Linkedin-%230077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/riccardo-giovarelli) [![github](https://img.shields.io/badge/github-181717.svg?logo=github&logoColor=white)](https://github.com/riccardo-giovarelli)
 
 ## License
 [MIT License](https://opensource.org/license/mit/)

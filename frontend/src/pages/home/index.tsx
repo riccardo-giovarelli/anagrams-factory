@@ -1,13 +1,12 @@
-import { useState } from 'react';
-
-import AnagramsTabAnagram from '../../components/anagrams-tab-anagram/anagrams-tab-anagram';
-import AnagramsTabDictionary from '../../components/anagrams-tab-dictionary/anagrams-tab-dictionary';
+import AnagramsTabResults from '../../components/anagrams-tab-results/anagrams-tab-results';
+import AnagramsTabSearch from '../../components/anagrams-tab-search/anagrams-tab-search';
 import AnagramsTabs from '../../components/anagrams-tabs/anagrams-tabs';
-import { tabsIdType } from '../../components/anagrams-tabs/anagrams-tabs.type';
 import Header from '../../components/header/header';
+import { useAppSelector } from '../../redux/hooks';
+
 
 const Home = () => {
-  const [currentTab, setCurrentTab] = useState<tabsIdType>('anagrams');
+  const { currentTab } = useAppSelector((state) => state.tab);
 
   return (
     <div className='home__container w-full flex flex-col px-4 pt-2 justify-center max-w-5xl m-auto min-w-[500px]'>
@@ -16,16 +15,16 @@ const Home = () => {
       </div>
       <div className='home__body bg-white mt-4 flex flex-col p-4 border-2 rounded-xl'>
         <div className='home__tabs-header'>
-          <AnagramsTabs currentTab={currentTab} setCurrentTab={setCurrentTab} />
+          <AnagramsTabs />
         </div>
-        {currentTab === 'anagrams' && (
+        {currentTab === 'search' && (
           <div className='home__tab-anagram my-16 w-full'>
-            <AnagramsTabAnagram />
+            <AnagramsTabSearch />
           </div>
         )}
-        {currentTab === 'dictionary' && (
+        {currentTab === 'results' && (
           <div className='home__tab-dictionary my-16 w-full'>
-            <AnagramsTabDictionary />
+            <AnagramsTabResults />
           </div>
         )}
       </div>
