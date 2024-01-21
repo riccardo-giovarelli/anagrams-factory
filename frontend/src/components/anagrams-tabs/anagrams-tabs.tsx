@@ -5,7 +5,6 @@ import { mergeClassNames } from '../../utils/style';
 import { getTabs } from './anagrams-tabs.lib';
 import { AnagramsTabsType, TabsType } from './anagrams-tabs.type';
 
-
 const AnagramsTabs = ({ className = '' }: AnagramsTabsType) => {
   const dispatch = useAppDispatch();
   const { currentTab } = useAppSelector((state) => state.tab);
@@ -40,7 +39,9 @@ const AnagramsTabs = ({ className = '' }: AnagramsTabsType) => {
               <button
                 key={index}
                 className={mergeClassNames(
-                  tab.id === currentTab ? 'border-af-900 text-af-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700',
+                  tab.id === currentTab
+                    ? 'border-af-900 text-af-900'
+                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700',
                   'group inline-flex items-center border-b-2 py-4 px-1 text-sm font-medium'
                 )}
                 aria-current={tab.id === currentTab ? 'page' : undefined}
