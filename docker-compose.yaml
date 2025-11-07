@@ -1,68 +1,68 @@
-version: '3'
-
-services: 
-
+services:
   backend:
-    build: 
+    build:
       context: backend
     container_name: backend
     working_dir: /usr/src/app
-    networks: 
+    networks:
       - node-network
-    volumes: 
+    volumes:
       - ./backend:/usr/src/app
       - /usr/src/app/node_modules
     tty: true
-    ports: 
+    ports:
       - "3000:3000"
-    command: npm run start
+    command: yarn run start
     depends_on:
-       - db
+      - db
 
   frontend:
-    build: 
+    build:
       context: frontend
     container_name: frontend
     working_dir: /usr/src/app
-    networks: 
+    networks:
       - node-network
-    volumes: 
+    volumes:
       - ./frontend:/usr/src/app
       - /usr/src/app/node_modules
     tty: true
-    ports: 
+    ports:
       - "5173:5173"
-    command: npm run dev
+    command: yarn run dev
 
   db:
-    image: postgres
+    image: postgres:17.6
     container_name: db
     restart: always
     tty: true
     volumes:
       - ./volumes/postgres-data:/var/lib/postgresql/data
-    environment: 
-      - POSTGRES_PASSWORD=1234
-    ports: 
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: postgres
+    ports:
       - "5432:5432"
-    networks: 
+    networks:
       - node-network
 
   nginx:
-    build: 
+    build:
       context: nginx
     container_name: nginx
     restart: always
     tty: true
-    ports: 
+    ports:
       - "8000:80"
-    networks: 
+    networks:
       - node-network
     depends_on:
-       - backend
-       - frontend
+      backend:
+        condition: service_started
+      frontend:
+        condition: service_started
 
-  
-networks: 
+networks:
   node-network:
-    driver: bridge    
+    driver: bridge
