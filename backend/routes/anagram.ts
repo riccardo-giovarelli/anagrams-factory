@@ -1,7 +1,8 @@
+import express from 'express';
+
 import { getAnagrams } from '../controller/anagram/anagram.controller';
 
-const express = require('express'),
-  router = express.Router();
+const router = express.Router();
 
 /**
  * Generate anagrams

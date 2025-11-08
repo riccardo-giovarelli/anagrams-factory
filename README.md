@@ -41,6 +41,14 @@ From the project root:
 ### App url
 `http://localhost:8000/`
 
+## Backend Test
+
+From the folder `backend`:
+
+```bash
+  yarn test
+```
+
 ## Author
 Riccardo Giovarelli
 

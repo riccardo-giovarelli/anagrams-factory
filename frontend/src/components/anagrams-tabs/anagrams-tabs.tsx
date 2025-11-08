@@ -1,14 +1,14 @@
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { setCurrentTab } from '../../redux/reducers/tabs/tabsSlice';
-import { tabsIdType } from '../../redux/reducers/tabs/tabsSlice.type';
-import { mergeClassNames } from '../../utils/style';
-import { getTabs } from './anagrams-tabs.lib';
+import { useAppDispatch, useAppSelector } from '@redux/hooks';
+import { setCurrentTab } from '@redux/reducers/tabs/tabsSlice';
+import { tabsIdType } from '@redux/reducers/tabs/tabsSlice.type';
+import { mergeClassNames } from '@utils/style';
+
+import { tabs } from './anagrams-tabs.lib';
 import { AnagramsTabsType, TabsType } from './anagrams-tabs.type';
 
 const AnagramsTabs = ({ className = '' }: AnagramsTabsType) => {
   const dispatch = useAppDispatch();
   const { currentTab } = useAppSelector((state) => state.tab);
-  const tabs: TabsType[] = getTabs();
 
   return (
     <div className={className}>
@@ -21,7 +21,7 @@ const AnagramsTabs = ({ className = '' }: AnagramsTabsType) => {
           name='tabs'
           className='block w-full border p-2 rounded-md border-gray-300 focus:border-af-900 focus:ring-af-900'
           value={tabs.find((tab) => tab.id === currentTab)?.id}
-          onChange={(e) => {
+          onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
             dispatch(setCurrentTab(e.target.value as tabsIdType));
           }}
         >
