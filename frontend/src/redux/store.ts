@@ -3,6 +3,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import anagramReducer from './reducers/anagram/anagramSlice';
 import tabsReducer from './reducers/tabs/tabsSlice';
 
+
 const store = configureStore({
   reducer: {
     anagram: anagramReducer,

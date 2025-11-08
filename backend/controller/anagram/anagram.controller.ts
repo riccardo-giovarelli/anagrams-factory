@@ -27,7 +27,9 @@ export const getAnagrams = (req: Request, res: Response): boolean => {
       title: 'Bad Request',
       detail: 'Input text for anagrams missing',
       links: {
-        self: `${req.protocol}://${req.hostname}${req?.socket?.localPort ? ':' + req.socket.localPort : ''}${req.originalUrl}`,
+        self: `${req.protocol}://${req.hostname}${req?.socket?.localPort ? ':' + req.socket.localPort : ''}${
+          req.originalUrl
+        }`,
       },
     });
     return false;
@@ -47,7 +49,9 @@ export const getAnagrams = (req: Request, res: Response): boolean => {
       title: 'Invalid input text',
       detail: `Input text is too long. Max length is ${process.env.ANAGRAM_INPUT_TEXT_MAX_LENGTH} characters.`,
       links: {
-        self: `${req.protocol}://${req.hostname}${req?.socket?.localPort ? ':' + req.socket.localPort : ''}${req.originalUrl}`,
+        self: `${req.protocol}://${req.hostname}${req?.socket?.localPort ? ':' + req.socket.localPort : ''}${
+          req.originalUrl
+        }`,
       },
     });
     return false;
@@ -67,7 +71,9 @@ export const getAnagrams = (req: Request, res: Response): boolean => {
       title: 'Invalid input text',
       detail: 'Only alphabetical characters allowed in the input text.',
       links: {
-        self: `${req.protocol}://${req.hostname}${req?.socket?.localPort ? ':' + req.socket.localPort : ''}${req.originalUrl}`,
+        self: `${req.protocol}://${req.hostname}${req?.socket?.localPort ? ':' + req.socket.localPort : ''}${
+          req.originalUrl
+        }`,
       },
     });
     return false;
@@ -80,7 +86,7 @@ export const getAnagrams = (req: Request, res: Response): boolean => {
   const text = req.query.text.toString().toLowerCase();
 
   // Generate anagrams
-  let results = generateAnagram(text as string, offset, limit, unique);
+  const results = generateAnagram(text as string, offset, limit, unique);
 
   // Total results
   const total = unique ? getNumOfUniqueAnagrams(text, text.length) : getFactorial(text.length);
@@ -94,7 +100,9 @@ export const getAnagrams = (req: Request, res: Response): boolean => {
      */
     res.status(200).json({
       links: {
-        self: `${req.protocol}://${req.hostname}${req?.socket?.localPort ? ':' + req.socket.localPort : ''}${req.originalUrl}`,
+        self: `${req.protocol}://${req.hostname}${req?.socket?.localPort ? ':' + req.socket.localPort : ''}${
+          req.originalUrl
+        }`,
       },
       data: [],
       meta: {
@@ -111,7 +119,9 @@ export const getAnagrams = (req: Request, res: Response): boolean => {
      */
     res.status(200).json({
       links: {
-        self: `${req.protocol}://${req.hostname}${req?.socket?.localPort ? ':' + req.socket.localPort : ''}${req.originalUrl}`,
+        self: `${req.protocol}://${req.hostname}${req?.socket?.localPort ? ':' + req.socket.localPort : ''}${
+          req.originalUrl
+        }`,
       },
       data: results.map((result: string, index: number) => ({
         type: 'anagram',

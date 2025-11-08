@@ -1,8 +1,8 @@
-import AnagramsTabResults from '../../components/anagrams-tab-results/anagrams-tab-results';
-import AnagramsTabSearch from '../../components/anagrams-tab-search/anagrams-tab-search';
-import AnagramsTabs from '../../components/anagrams-tabs/anagrams-tabs';
-import Header from '../../components/header/header';
-import { useAppSelector } from '../../redux/hooks';
+import AnagramsTabResults from '@components/anagrams-tab-results/anagrams-tab-results';
+import AnagramsTabSearch from '@components/anagrams-tab-search/anagrams-tab-search';
+import AnagramsTabs from '@components/anagrams-tabs/anagrams-tabs';
+import Header from '@components/header/header';
+import { useAppSelector } from '@redux/hooks';
 
 
 const Home = () => {

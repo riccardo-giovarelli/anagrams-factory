@@ -1,14 +1,53 @@
 # Anagrams Factory
-Anagrams Factory generates anagrams and shows it paginated (optionally, excludes the duplicated ones)
+Anagrams Factory generates anagrams and displays them, paginated (optionally, excluding duplicates).
 
 ## Prerequisites
 - Node.js
 - Docker
 
-## Development environment
-1. Start Docker
-2. In a terminal, run `docker compose up`
-3. In your browser open the url [http://localhost:5173/](http://localhost:5173/)
+## Environment
+
+### First run :hammer:
+
+1 - From the folder `backend`:
+
+```bash
+  yarn
+```
+
+2 - From the project root:
+
+```bash
+  docker compose up --build
+```
+
+### Run :point_right:
+
+From the project root:
+
+```bash
+  docker compose up
+```
+
+### Stop :hand:
+
+From the project root:
+
+```bash
+  docker compose stop
+```
+
+## Development server
+### App url
+`http://localhost:8000/`
+
+## Backend Test
+
+From the folder `backend`:
+
+```bash
+  yarn test
+```
 
 ## Author
 Riccardo Giovarelli

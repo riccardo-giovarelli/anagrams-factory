@@ -1,28 +1,38 @@
 import { getFactorial, getNumOfUniqueAnagrams } from './math.lib';
 
 /**
- * @function swap
+ * Swaps two elements in a character array at the specified indices.
  *
- * @param {string[]} chars String where swap chars
- * @param {number} i Index of first char
- * @param {number} j Index of second char
- * @returns {string[]} String swapped
+ * Modifies the original array by exchanging the elements at positions `i` and `j`,
+ * and returns the updated array.
+ *
+ * @param {string[]} chars - The array of characters to modify.
+ * @param {number} i - The index of the first element to swap.
+ * @param {number} j - The index of the second element to swap.
+ * @returns {string[]} The modified array with the two elements swapped.
  */
 const swap = (chars: string[], i: number, j: number): string[] => {
-  var tmp = chars[i];
+  const tmp = chars[i];
   chars[i] = chars[j];
   chars[j] = tmp;
   return chars;
 };
 
 /**
- * @function generateAnagram
+ * Generates a paginated list of anagrams for a given input string.
  *
- * @param {string} input Text to anagram
- * @param {number} offset Page number in results
- * @param {number} limit Size of page in results
- * @param {boolean} unique Return only unique values
- * @returns {string[]} Array of anagrams
+ * Uses Heap's algorithm to produce permutations of the input string,
+ * optionally filtering for uniqueness. Supports pagination via `offset` and `limit`,
+ * returning only the requested slice of anagrams.
+ *
+ * @param {string} input - The original string to generate anagrams from.
+ * @param {number} offset - The page offset (zero-based), used to skip anagrams.
+ * @param {number} limit - The maximum number of anagrams to return.
+ * @param {boolean} [unique=false] - Whether to return only unique anagrams (no duplicates).
+ * @returns {string[]} A list of generated anagrams based on the specified parameters.
+ *
+ * @example
+ * generateAnagram('abc', 0, 3); // ['abc', 'bac', 'cab']
  */
 export const generateAnagram = (input: string, offset: number, limit: number, unique: boolean = false): string[] => {
   const numOfAnagrams = unique ? getNumOfUniqueAnagrams(input, input.length) : getFactorial(input.length);
@@ -54,7 +64,12 @@ export const generateAnagram = (input: string, offset: number, limit: number, un
       if (!unique && anagramsCounter >= startIndex && anagrams.length < limit) {
         anagrams.push(currentAnagram);
         anagramsCounter++;
-      } else if (unique && anagramsCounter >= startIndex && !anagrams.includes(currentAnagram) && anagrams.length < limit) {
+      } else if (
+        unique &&
+        anagramsCounter >= startIndex &&
+        !anagrams.includes(currentAnagram) &&
+        anagrams.length < limit
+      ) {
         anagrams.push(currentAnagram);
         anagramsCounter++;
       } else if (anagramsCounter < startIndex) {

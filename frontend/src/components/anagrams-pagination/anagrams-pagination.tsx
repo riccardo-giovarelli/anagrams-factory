@@ -1,24 +1,14 @@
-import { mergeClassNames } from '../../utils/style';
+import { handleNextClick, handlePreviousClick } from '@/components/anagrams-pagination/anagrams-pagination.lib';
+import { mergeClassNames } from '@utils/style';
+
 import { AnagramsPaginationType } from './anagrams-pagination.type';
 
-
 const AnagramsPagination = ({ offset, limit, total, setOffset }: AnagramsPaginationType) => {
-  // Previous click
-  const handlePreviousClick = () => {
-    if (offset - 1 >= 0) {
-      setOffset(offset - 1);
-    }
-  };
-
-  // Next click
-  const handleNextClick = () => {
-    if (limit * (offset + 1) <= total) {
-      setOffset(offset + 1);
-    }
-  };
-
   return (
-    <nav className='flex items-center justify-between border-2 rounded-xl border-af-900 bg-white p-3 mx-5' aria-label='Pagination'>
+    <nav
+      className='flex items-center justify-between border-2 rounded-xl border-af-900 bg-white p-3 mx-5'
+      aria-label='Pagination'
+    >
       <div className='hidden sm:block'>
         <p className='text-sm text-af-900'>
           Showing <span className='font-medium'>{offset * limit + 1}</span> to{' '}
@@ -32,7 +22,9 @@ const AnagramsPagination = ({ offset, limit, total, setOffset }: AnagramsPaginat
             offset - 1 >= 0 ? 'hover:bg-af-600' : 'opacity-50 cursor-not-allowed',
             'relative inline-flex items-center rounded-md px-3 py-2 text-sm font-semibold bg-af-900 text-white focus-visible:outline-offset-0'
           )}
-          onClick={handlePreviousClick}
+          onClick={() => {
+            handlePreviousClick(offset, setOffset);
+          }}
         >
           Previous
         </button>
@@ -41,7 +33,9 @@ const AnagramsPagination = ({ offset, limit, total, setOffset }: AnagramsPaginat
             limit * (offset + 1) <= total ? 'hover:bg-af-600' : 'opacity-50 cursor-not-allowed',
             'relative inline-flex items-center rounded-md px-3 py-2 text-sm font-semibold bg-af-900 text-white focus-visible:outline-offset-0'
           )}
-          onClick={handleNextClick}
+          onClick={() => {
+            handleNextClick(limit, offset, total, setOffset);
+          }}
         >
           Next
         </button>

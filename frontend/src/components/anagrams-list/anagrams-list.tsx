@@ -1,19 +1,22 @@
 import './anagrams-list.style.scss';
 
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { setOffset, setUnique } from '../../redux/reducers/anagram/anagramSlice';
-import { AnagramDataType } from '../../redux/reducers/anagram/anagramSlice.type';
-import { fetchAnagrams } from '../../redux/reducers/anagram/anagramThunk.ts';
-import { mergeClassNames } from '../../utils/style.ts';
-import AnagramsPagination from '../anagrams-pagination/anagrams-pagination';
-import Toggle from '../toggle/toggle.tsx';
-
+import AnagramsPagination from '@components/anagrams-pagination/anagrams-pagination';
+import Toggle from '@components/toggle/toggle.tsx';
+import { useAppDispatch, useAppSelector } from '@redux/hooks';
+import { setOffset, setUnique } from '@redux/reducers/anagram/anagramSlice';
+import { AnagramDataType } from '@redux/reducers/anagram/anagramSlice.type';
+import { fetchAnagrams } from '@redux/reducers/anagram/anagramThunk.ts';
+import { mergeClassNames } from '@utils/style.ts';
 
 const AnagramsList = () => {
   const { anagrams, offset, limit, unique } = useAppSelector((state) => state.anagram);
   const dispatch = useAppDispatch();
 
-  return anagrams?.data && Array.isArray(anagrams.data) ? (
+  if (!anagrams?.data || !Array.isArray(anagrams.data)) {
+    return null;
+  }
+
+  return (
     <div className='anagramslist__container'>
       <div className='anagramslist__toggle-unique mx-5 p-2 border-2 border-af-900 rounded-xl w-fit'>
         <Toggle
@@ -60,8 +63,6 @@ const AnagramsList = () => {
         />
       </div>
     </div>
-  ) : (
-    <></>
   );
 };
 

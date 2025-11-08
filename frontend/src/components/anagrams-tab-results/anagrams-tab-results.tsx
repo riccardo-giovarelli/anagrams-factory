@@ -1,9 +1,9 @@
-import { useAppSelector } from '../../redux/hooks';
-import AnagramsList from '../anagrams-list/anagrams-list';
-
+import AnagramsList from '@components/anagrams-list/anagrams-list';
+import { useAppSelector } from '@redux/hooks';
 
 const AnagramsTabResults = () => {
   const { anagrams } = useAppSelector((state) => state.anagram);
+
   return (
     <div className='anagramstabanagram__anagrams-container mt-4'>
       {anagrams ? (

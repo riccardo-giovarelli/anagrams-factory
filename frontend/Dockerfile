@@ -4,6 +4,6 @@ WORKDIR /usr/src/app
 
 COPY . .
 
-RUN npm install
+RUN yarn install
 
 EXPOSE 5173
