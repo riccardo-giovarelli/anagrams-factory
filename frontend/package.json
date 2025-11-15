@@ -11,11 +11,14 @@
     "cypress:open": "cypress open"
   },
   "dependencies": {
+    "@cypress/react": "^9.0.1",
+    "@cypress/vite-dev-server": "^7.0.1",
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.1.1",
     "@reduxjs/toolkit": "^2.0.1",
     "axios": "^1.6.5",
-    "react": "^18.2.0",
+    "cypress": "^15.6.0",
+    "react": "18",
     "react-dom": "^18.2.0",
     "react-redux": "^9.0.4",
     "react-router-dom": "^6.21.0",
@@ -29,13 +32,12 @@
     "@typescript-eslint/parser": "^6.14.0",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.16",
-    "cypress": "^15.6.0",
     "eslint": "^8.55.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
     "postcss": "^8.4.32",
     "tailwindcss": "^3.3.6",
     "typescript": "^5.2.2",
-    "vite": "^4.0.0"
+    "vite": "^7.2.2"
   }
 }
