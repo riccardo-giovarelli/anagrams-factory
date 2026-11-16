@@ -1,6 +1,6 @@
-import AnagramsTabSearch from '../anagrams-tab-search';
+import AnagramsTabSearch from "../anagrams-tab-search";
 
-it('mounts', () => {
+it("mounts", () => {
   cy.mount(<AnagramsTabSearch />);
-  cy.get('[data-cy=original-text]').should('have.text', '');
+  cy.get("[data-cy=original-text]").should("have.value", "");
 });

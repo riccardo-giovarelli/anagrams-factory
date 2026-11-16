@@ -1,5 +1,5 @@
 /**
- * Recursively computes the factorial of a non-negative integer.
+ * Computes the factorial of a non-negative integer.
  *
  * The factorial of a number `x` is the product of all positive integers less than or equal to `x`.
  * For example, `getFactorial(5)` returns `120` because 5 × 4 × 3 × 2 × 1 = 120.
@@ -9,7 +9,11 @@
  * @returns {number} The factorial of the input number.
  */
 export const getFactorial = (x: number): number => {
-  return x > 1 ? x * getFactorial(x - 1) : 1;
+  let result = 1;
+  for (let i = 2; i <= x; i++) {
+    result *= i;
+  }
+  return result;
 };
 
 /**
@@ -26,13 +30,13 @@ export const getFactorial = (x: number): number => {
  * getCountOfMultipleOccurrenceInAString('aabbc') // [2, 2]
  */
 const getCountOfMultipleOccurrenceInAString = (text: string): number[] => {
-  const count = {};
-  text.split('').forEach((char: string) => {
-    count[char] = !count[char] ? 1 : count[char] + 1;
-  });
-  return Object.keys(count)
-    .map((char: string) => (count[char] > 1 ? count[char] : null))
-    .filter((item: number | null) => item !== null);
+  const count: Record<string, number> = {};
+
+  for (const char of text) {
+    count[char] = (count[char] ?? 0) + 1;
+  }
+
+  return Object.values(count).filter((occurrences) => occurrences > 1);
 };
 
 /**
@@ -43,13 +47,18 @@ const getCountOfMultipleOccurrenceInAString = (text: string): number[] => {
  * that reduce the total number of distinct permutations.
  *
  * @param {string} text - The input string to analyze.
- * @param {number} textLength - The length of the input string.
+ * @param {number} [textLength=text.length] - The length of the input string (defaults to text.length).
  * @returns {number} The total number of unique anagrams that can be generated.
  *
  * @example
  * getNumOfUniqueAnagrams('aabb', 4); // returns 6
  */
+export const getNumOfUniqueAnagrams = (text: string, textLength: number = text.length): number => {
+  if (!text || textLength <= 0) {
+    return 0;
+  }
 
-export const getNumOfUniqueAnagrams = (text: string, textLength: number): number =>
-  getFactorial(textLength) /
-  getCountOfMultipleOccurrenceInAString(text).reduce((total, num) => total * getFactorial(num), 1);
+  const denominator = getCountOfMultipleOccurrenceInAString(text).reduce((total, num) => total * getFactorial(num), 1);
+
+  return getFactorial(textLength) / denominator;
+};

@@ -1,13 +1,16 @@
-import 'dotenv/config';
+import "dotenv/config";
 
 // Sample input text (valid)
-export const inputText = 'Rick';
+export const inputText: string = "Rick";
 
-// Sample imput text (valid) with repeated characters
-export const inputTextWithRepeatedCharacters = 'natan';
+// Sample input text (valid) with repeated characters
+export const inputTextWithRepeatedCharacters: string = "natan";
 
 // Sample input text (invalid characters)
-export const inputInvalidText = '12_34!56';
+export const inputInvalidText: string = "12_34!56";
 
 // Sample input text (too long)
-export const getTooLongText = () => [...Array(Number(process.env.ANAGRAM_INPUT_TEXT_MAX_LENGTH) + 1)].map((_, i) => 'a').join('');
+export const getTooLongText = (): string => {
+  const maxLength = Number(process.env.ANAGRAM_INPUT_TEXT_MAX_LENGTH) || 10;
+  return Array.from({ length: maxLength + 1 }, () => "a").join("");
+};

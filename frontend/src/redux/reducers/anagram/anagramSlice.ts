@@ -1,29 +1,35 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 import {
-    caseAnagramsFulfilled, caseAnagramsPending, caseAnagramsRejected, reducerRestore,
-    reducerSetOffset, reducerSetUnique, reduceSetAnagrams, reduceSetLimit, reduceSetText
-} from './anagramReducers';
-import { AnagramsStateType } from './anagramSlice.type';
-import { fetchAnagrams } from './anagramThunk';
+  caseAnagramsFulfilled,
+  caseAnagramsPending,
+  caseAnagramsRejected,
+  reducerRestore,
+  reducerSetOffset,
+  reducerSetUnique,
+  reduceSetAnagrams,
+  reduceSetLimit,
+  reduceSetText,
+} from "./anagramReducers";
+import { AnagramsStateType } from "./anagramSlice.type";
+import { fetchAnagrams } from "./anagramThunk";
 
-
-//Initial state
-const anagramsInitialState: AnagramsStateType = {
-  text: '',
+// Initial state
+export const anagramsInitialState: AnagramsStateType = {
+  text: "",
   anagrams: null,
   unique: false,
   offset: 0,
   limit: 50,
-  status: 'idle',
-  error: '',
+  status: "idle",
+  error: "",
 };
 
 /**
- * Anagram reducer
+ * Anagram slice
  */
 export const anagramSlice = createSlice({
-  name: 'anagram',
+  name: "anagram",
   initialState: anagramsInitialState,
   reducers: {
     setText: reduceSetText,
@@ -33,7 +39,7 @@ export const anagramSlice = createSlice({
     setUnique: reducerSetUnique,
     restore: reducerRestore,
   },
-  extraReducers(builder) {
+  extraReducers: (builder) => {
     builder
       .addCase(fetchAnagrams.pending, caseAnagramsPending)
       .addCase(fetchAnagrams.fulfilled, caseAnagramsFulfilled)
