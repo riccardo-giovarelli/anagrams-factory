@@ -74,7 +74,7 @@ From the folder `backend`:
 From the folder `frontend`:
 
 ```bash
-  yarn yarn cypress open
+  yarn cypress open
 ```
 
 ## Author

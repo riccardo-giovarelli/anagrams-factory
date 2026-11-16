@@ -1,11 +1,10 @@
-import { PayloadAction } from '@reduxjs/toolkit';
+import { PayloadAction } from "@reduxjs/toolkit";
 
-import { tabsIdType, TabsStateType } from './tabsSlice.type';
-
+import { tabsIdType, TabsStateType } from "./tabsSlice.type";
 
 /**
- * REDUCER: setText
+ * REDUCER: setCurrentTab
  */
-export const reduceSetCurrentTab = (state: TabsStateType, action: PayloadAction<tabsIdType>) => {
+export const reduceSetCurrentTab = (state: TabsStateType, action: PayloadAction<tabsIdType>): void => {
   state.currentTab = action.payload;
 };

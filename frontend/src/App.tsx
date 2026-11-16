@@ -1,21 +1,19 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { JSX } from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import Home from '@pages/home';
+import Home from "@pages/home";
 
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+  },
+]);
 
-const App = () => {
-  const router = createBrowserRouter([
-    {
-      path: '/',
-      element: <Home />,
-    },
-  ]);
-
-  return (
-    <div className='app_container'>
-      <RouterProvider router={router} />
-    </div>
-  );
-};
+const App = (): JSX.Element => (
+  <div className="app_container">
+    <RouterProvider router={router} />
+  </div>
+);
 
 export default App;

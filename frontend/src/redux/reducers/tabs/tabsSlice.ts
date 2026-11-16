@@ -1,19 +1,18 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
-import { reduceSetCurrentTab } from './tabsReducers';
-import { TabsStateType } from './tabsSlice.type';
+import { reduceSetCurrentTab } from "./tabsReducers";
+import { TabsStateType } from "./tabsSlice.type";
 
-
-//Initial state
-const tabsInitialState: TabsStateType = {
-  currentTab: 'search',
+// Initial state
+export const tabsInitialState: TabsStateType = {
+  currentTab: "search",
 };
 
 /**
- * Anagram reducer
+ * Tabs slice
  */
 export const tabsSlice = createSlice({
-  name: 'tabs',
+  name: "tabs",
   initialState: tabsInitialState,
   reducers: {
     setCurrentTab: reduceSetCurrentTab,
